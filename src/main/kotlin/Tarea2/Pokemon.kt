@@ -6,22 +6,24 @@ interface Pokemon {
     val tipo: String
     var contadorDamage: Int
     val ataquePrimario: Int get() = 50
-    val tipoAtaquePrimario: String get() = tipo
     val ataqueSecundario: Int get() = 30
-    val tipoAtaqueSecundario: String get() = "Normal"
     var ataqueSeleccionado: Int
 
-    fun atacarContrincanteDefinido(pokemon: Pokemon): Pokemon {
-        return pokemon.atacarContrincanteDefinido(this)
+    fun iniciarAtaque(pokemon: Pokemon) {
+        pokemon.observarOponente(this)
     }
 
-    fun atacar(oponente: Pokemon): Pokemon {
+    fun observarOponente(pokemon: Pokemon) {
+        pokemon.atacar(this)
+    }
+
+    fun atacar(oponente: Pokemon) {
         if (fueraDeCombate()) {
             println("No puedo atacar")
         }
-        else:
+        else {
             this.realizarAtaque(oponente, this.ataqueSeleccionado)
-            return this
+        }
     }
 
     fun seleccionarAtaqueAUsar(decision: Int) {
