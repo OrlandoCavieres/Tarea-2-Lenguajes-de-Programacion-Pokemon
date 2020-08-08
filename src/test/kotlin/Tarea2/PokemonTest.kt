@@ -41,11 +41,13 @@ class PokemonTest {
         assertEquals("Squirtle es debil frente a Pikachu, aumenta su contador de daño en 70", 70, squirtle.contadorDamage)
         assertEquals("Pikachu no tiene daño aun, su contador se mantiene en 0", 0, pikachu.contadorDamage)
         squirtle.iniciarAtaque(pikachu)
-        assertEquals("Pikachu no es debil pero tampoco resistente a Squirtle, se espera daño normal, aumenta en 50 el contador de daño", 50, pikachu.contadorDamage)
+        assertEquals("Pikachu no es debil pero tampoco resistente a Squirtle, se espera daño normal, aumenta en 50 el contador de daño",
+                     50, pikachu.contadorDamage)
         pikachu.seleccionarAtaqueAUsar(2)
         assertEquals("Pikachu cambio su ataque al secundario, por lo que ataque seleccionado deberia ser 2", 2, pikachu.ataqueSeleccionado)
         pikachu.iniciarAtaque(squirtle)
-        assertEquals("Squirtle no es debil ni resistente a un ataque de tipo Normal, aumenta el contador en 30, dado que es ataque secundario", 100, squirtle.contadorDamage)
+        assertEquals("Squirtle no es debil ni resistente a un ataque de tipo Normal, aumenta el contador en 30, dado que es ataque secundario",
+                     100, squirtle.contadorDamage)
         squirtle.seleccionarAtaqueAUsar(2)
         assertEquals("Squirtle selecciona su ataque secundario, por lo que el ataque seleccionado es 2 ahora", 2, squirtle.ataqueSeleccionado)
         squirtle.iniciarAtaque(pikachu)
@@ -68,15 +70,18 @@ class PokemonTest {
         assertEquals("Lucario es resistente al ataque primario de Diglett, aumenta su contador de daño en 30", 30, lucario.contadorDamage)
         assertEquals("Diglett no tiene daño aun, su contador se mantiene en 0", 0, diglett.contadorDamage)
         lucario.iniciarAtaque(diglett)
-        assertEquals("Diglett no es debil pero tampoco resistente a Lucario, se espera daño normal, aumenta en 50 el contador de daño", 50, diglett.contadorDamage)
+        assertEquals("Diglett no es debil pero tampoco resistente a Lucario, se espera daño normal, aumenta en 50 el contador de daño",
+                     50, diglett.contadorDamage)
         diglett.seleccionarAtaqueAUsar(2)
         assertEquals("Diglett cambio su ataque al secundario, por lo que ataque seleccionado deberia ser 2", 2, diglett.ataqueSeleccionado)
         diglett.iniciarAtaque(lucario)
-        assertEquals("Lucario no es debil ni resistente a un ataque de tipo Normal, aumenta el contador en 30, dado que es ataque secundario", 60, lucario.contadorDamage)
+        assertEquals("Lucario no es debil ni resistente a un ataque de tipo Normal, aumenta el contador en 30, dado que es ataque secundario",
+                     60, lucario.contadorDamage)
         lucario.seleccionarAtaqueAUsar(2)
         assertEquals("Lucario selecciona su ataque secundario, por lo que el ataque seleccionado es 2 ahora", 2, lucario.ataqueSeleccionado)
         lucario.iniciarAtaque(diglett)
-        assertEquals("El contador de daño de Diglett deberia subir en 10, dado ataque secundario normal de Lucario al cual es resistente", 60, diglett.contadorDamage)
+        assertEquals("El contador de daño de Diglett deberia subir en 10, dado ataque secundario normal de Lucario al cual es resistente",
+                     60, diglett.contadorDamage)
         lucario.seleccionarAtaqueAUsar(1)
         diglett.seleccionarAtaqueAUsar(1)
         diglett.iniciarAtaque(lucario)
@@ -85,9 +90,11 @@ class PokemonTest {
         lucario.iniciarAtaque(diglett)
         diglett.iniciarAtaque(lucario)
         lucario.iniciarAtaque(diglett)
-        assertEquals("Finalmente, diglett fue el primero en tener un contador de daño superior a 200, quedando fuera de combate", 210, diglett.contadorDamage)
+        assertEquals("Finalmente, diglett fue el primero en tener un contador de daño superior a 200, quedando fuera de combate",
+                     210, diglett.contadorDamage)
         assertEquals("El contador de daño final de Lucario en esta batalla es de 150", 150, lucario.contadorDamage)
         diglett.iniciarAtaque(lucario)
-        assertEquals("Diglett está fuera de combate y ha sido derrotado, por lo que no deberia causar daño a Lucario", 150, lucario.contadorDamage)
+        assertEquals("Diglett está fuera de combate y ha sido derrotado, por lo que no deberia causar daño a Lucario",
+                     150, lucario.contadorDamage)
     }
 }
