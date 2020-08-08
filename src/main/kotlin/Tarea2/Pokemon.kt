@@ -48,4 +48,10 @@ interface Pokemon {
     fun fueraDeCombate(): Boolean {
         return this.contadorDamage >= this.vida
     }
+
+    fun modDamageAtaquePrimario(pokemon: Pokemon, modificador: Int) {
+        when (pokemon.ataqueSeleccionado) {
+            1 -> this.contadorDamage += pokemon.ataquePrimario + modificador
+        }
+    }
 }
