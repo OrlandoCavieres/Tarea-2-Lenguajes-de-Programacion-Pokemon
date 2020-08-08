@@ -18,14 +18,10 @@ interface Pokemon {
     }
 
     fun atacar(oponente: Pokemon) {
-        if (this.fueraDeCombate()) {
-            println("${this.nombre}: No puedo atacar")
-        }
-        else if (oponente.fueraDeCombate()) {
-            println("${this.nombre}: Enemigo ya fue derrotado")
-        }
-        else {
-            this.realizarAtaque(oponente, this.ataqueSeleccionado)
+        when {
+            this.fueraDeCombate() -> println("${this.nombre}: No puedo atacar")
+            oponente.fueraDeCombate() -> println("${this.nombre}: Enemigo ya fue derrotado")
+            else -> this.realizarAtaque(oponente, this.ataqueSeleccionado)
         }
     }
 
