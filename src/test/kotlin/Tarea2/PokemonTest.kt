@@ -7,12 +7,14 @@ class PokemonTest {
     @Test fun testInstancias() {
         val charmander = FirePokemon("Charmander")
         val charmy = FirePokemon("Charmander")
+        val mantine = WaterPokemon("Mantine")
         assertNotNull("Revisar que el objeto charmy no sea nulo", charmy)
         assertEquals("Asegurar que el objeto charmander sobreescribió el nombre correctamente al que corresponde",
                      charmander.nombre, "Charmander")
         assertEquals("La propiedad tipo de los objetos charmander y charmy al ser ambos FirePokemon debe ser igual",
                      charmander.tipo, charmy.tipo)
         assertTrue("Se espera que charmander y charmy sean de la misma clase", charmander::class == charmy::class)
+        assertTrue("Se espera que mantine y charmander sean de distinta clase", charmander::class != mantine::class)
     }
 
     @Test fun testPruebaVida() {
