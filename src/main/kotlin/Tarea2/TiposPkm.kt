@@ -192,6 +192,28 @@ class FightPokemon(override val nombre: String): Pokemon {
 class GrassPokemon(override val nombre: String): Pokemon {
     override var contadorDamage = 0
     override val tipo = "Hierba"
-    override val debilidad = listOf("Fuego")
-    override val fortaleza = listOf("Agua", "Tierra")
+    override var ataqueSeleccionado = 1
+
+    override fun atacarContrincanteDefinido(pokemon: Pokemon): Pokemon {
+        return pokemon.atacar(this)
+    }
+
+    override fun realizarAtaque(oponente: Pokemon, ataque: Int) {
+        when(ataque) {
+            1 -> oponente.recibeGrassDamage(this)
+            2 -> oponente.recibeNormalDamage(this)
+        }
+    }
+
+    override fun recibeFireDamage(oponente: FirePokemon) {
+        modDamageAtaquePrimario(pokemon = oponente, modificador = 20)
+    }
+
+    override fun recibeWaterDamage(oponente: WaterPokemon) {
+        modDamageAtaquePrimario(pokemon = oponente, modificador = -20)
+    }
+
+    override fun recibeGroundDamage(oponente: GroundPokemon) {
+        modDamageAtaquePrimario(pokemon = oponente, modificador = -20)
+    }
 }
