@@ -3,7 +3,7 @@ package Tarea2
 interface Pokemon {
     val nombre: String
     val vida: Int get() = 200
-    val tipo: String
+    val tipo: String get() = "Normal"
     var contadorDamage: Int
     val ataquePrimario: Int get() = 50
     val ataqueSecundario: Int get() = 30

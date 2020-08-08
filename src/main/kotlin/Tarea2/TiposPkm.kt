@@ -2,7 +2,6 @@ package Tarea2
 
 class NormalPokemon(override val nombre: String): Pokemon {
     override var contadorDamage = 0
-    override val tipo = "Normal"
     override var ataqueSeleccionado = 1
 
     override fun realizarAtaque(oponente: Pokemon, ataque: Int) {
