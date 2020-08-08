@@ -5,10 +5,6 @@ class NormalPokemon(override val nombre: String): Pokemon {
     override val tipo = "Normal"
     override var ataqueSeleccionado = 1
 
-    override fun atacarContrincanteDefinido(pokemon: Pokemon): Pokemon {
-        return pokemon.atacar(this)
-    }
-
     override fun realizarAtaque(oponente: Pokemon, ataque: Int) {
         when (ataque) {
             1, 2 -> oponente.recibeNormalDamage(this)
@@ -28,10 +24,6 @@ class FirePokemon(override val nombre: String): Pokemon {
     override var contadorDamage = 0
     override val tipo = "Fuego"
     override var ataqueSeleccionado = 1
-
-    override fun atacarContrincanteDefinido(pokemon: Pokemon): Pokemon{
-        return pokemon.atacar(this)
-    }
 
     override fun realizarAtaque(oponente: Pokemon, ataque: Int) {
         when(ataque) {
@@ -58,10 +50,6 @@ class WaterPokemon(override val nombre: String): Pokemon {
     override val tipo = "Agua"
     override var ataqueSeleccionado = 1
 
-    override fun atacarContrincanteDefinido(pokemon: Pokemon): Pokemon {
-        return pokemon.atacar(this)
-    }
-
     override fun realizarAtaque(oponente: Pokemon, ataque: Int) {
         when(ataque) {
             1 -> oponente.recibeWaterDamage(this)
@@ -87,10 +75,6 @@ class ElectricPokemon(override val nombre: String): Pokemon {
     override val tipo = "Electrico"
     override var ataqueSeleccionado = 1
 
-    override fun atacarContrincanteDefinido(pokemon: Pokemon): Pokemon {
-        return pokemon.atacar(this)
-    }
-
     override fun realizarAtaque(oponente: Pokemon, ataque: Int) {
         when(ataque) {
             1 -> oponente.recibeElectricDamage(this)
@@ -112,10 +96,6 @@ class PsychicPokemon(override val nombre: String): Pokemon {
     override val tipo = "Psiquico"
     override var ataqueSeleccionado = 1
 
-    override fun atacarContrincanteDefinido(pokemon: Pokemon): Pokemon {
-        return pokemon.atacar(this)
-    }
-
     override fun realizarAtaque(oponente: Pokemon, ataque: Int) {
         when(ataque) {
             1 -> oponente.recibePsychicDamage(this)
@@ -132,10 +112,6 @@ class GroundPokemon(override val nombre: String): Pokemon {
     override var contadorDamage = 0
     override val tipo = "Tierra"
     override var ataqueSeleccionado = 1
-
-    override fun atacarContrincanteDefinido(pokemon: Pokemon): Pokemon {
-        return pokemon.atacar(this)
-    }
 
     override fun realizarAtaque(oponente: Pokemon, ataque: Int) {
         when(ataque) {
@@ -169,10 +145,6 @@ class FightPokemon(override val nombre: String): Pokemon {
     override val tipo = "Lucha"
     override var ataqueSeleccionado = 1
 
-    override fun atacarContrincanteDefinido(pokemon: Pokemon): Pokemon {
-        return pokemon.atacar(this)
-    }
-
     override fun realizarAtaque(oponente: Pokemon, ataque: Int) {
         when(ataque) {
             1 -> oponente.recibeFightDamage(this)
@@ -193,10 +165,6 @@ class GrassPokemon(override val nombre: String): Pokemon {
     override var contadorDamage = 0
     override val tipo = "Hierba"
     override var ataqueSeleccionado = 1
-
-    override fun atacarContrincanteDefinido(pokemon: Pokemon): Pokemon {
-        return pokemon.atacar(this)
-    }
 
     override fun realizarAtaque(oponente: Pokemon, ataque: Int) {
         when(ataque) {
