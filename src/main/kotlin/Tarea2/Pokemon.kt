@@ -10,10 +10,10 @@ interface Pokemon {
     var ataqueSeleccionado: Int
 
     fun iniciarAtaque(pokemon: Pokemon) {
-        pokemon.observarOponente(this)
+        pokemon.observarOponenteYEntregarDatos(this)
     }
 
-    fun observarOponente(pokemon: Pokemon) {
+    fun observarOponenteYEntregarDatos(pokemon: Pokemon) {
         pokemon.atacar(this)
     }
 
