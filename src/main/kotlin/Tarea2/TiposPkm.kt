@@ -85,8 +85,26 @@ class WaterPokemon(override val nombre: String): Pokemon {
 class ElectricPokemon(override val nombre: String): Pokemon {
     override var contadorDamage = 0
     override val tipo = "Electrico"
-    override val debilidad = listOf("Tierra")
-    override val fortaleza = listOf("Agua", "Electrico")
+    override var ataqueSeleccionado = 1
+
+    override fun atacarContrincanteDefinido(pokemon: Pokemon): Pokemon {
+        return pokemon.atacar(this)
+    }
+
+    override fun realizarAtaque(oponente: Pokemon, ataque: Int) {
+        when(ataque) {
+            1 -> oponente.recibeElectricDamage(this)
+            2 -> oponente.recibeNormalDamage(this)
+        }
+    }
+
+    override fun recibeElectricDamage(oponente: ElectricPokemon) {
+        modDamageAtaquePrimario(pokemon = oponente, modificador = 20)
+    }
+
+    override fun recibeGroundDamage(oponente: GroundPokemon) {
+        modDamageAtaquePrimario(pokemon = oponente, modificador = -20)
+    }
 }
 
 class PsychicPokemon(override val nombre: String): Pokemon {
