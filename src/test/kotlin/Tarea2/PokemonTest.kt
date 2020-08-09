@@ -5,9 +5,11 @@ import org.junit.Assert.*
 
 class PokemonTest {
     @Test fun testInstancias() {
+        val pidgey: NormalPokemon? = null
         val charmander = FirePokemon("Charmander")
         val charmy = FirePokemon("Charmander")
         val mantine = WaterPokemon("Mantine")
+        assertNull("Pídgey es nulo", pidgey)
         assertNotNull("Revisar que el objeto charmy no sea nulo", charmy)
         assertEquals("Asegurar que el objeto charmander sobreescribió el nombre correctamente al que corresponde",
                      charmander.nombre, "Charmander")
@@ -15,6 +17,9 @@ class PokemonTest {
                      charmander.tipo, charmy.tipo)
         assertTrue("Se espera que charmander y charmy sean de la misma clase", charmander::class == charmy::class)
         assertTrue("Se espera que mantine y charmander sean de distinta clase", charmander::class != mantine::class)
+        assertEquals("Atacar a un Pokemon no inicializado da Null", null, charmander.iniciarAtaque(pidgey))
+        assertEquals("Atacar a un Pokemon inicialiado correctamente, entrega al pokemon atacado",
+                     charmy, mantine.iniciarAtaque(charmy))
     }
 
     @Test fun testPruebaVida() {
