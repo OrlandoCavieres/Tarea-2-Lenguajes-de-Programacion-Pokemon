@@ -9,8 +9,14 @@ interface Pokemon {
     val ataqueSecundario: Int get() = 30
     var ataqueSeleccionado: Int
 
-    fun iniciarAtaque(pokemon: Pokemon) {
-        pokemon.observarOponenteYEntregarDatos(this)
+    fun iniciarAtaque(pokemon: Pokemon?): Pokemon? {
+        if (pokemon != null) {
+            pokemon.observarOponenteYEntregarDatos(this)
+            return pokemon
+        }
+        else {
+            return null
+        }
     }
 
     fun observarOponenteYEntregarDatos(pokemon: Pokemon) {
@@ -19,7 +25,7 @@ interface Pokemon {
 
     fun atacar(oponente: Pokemon) {
         when {
-            this.fueraDeCombate() -> println("${this.nombre}: No puedo atacar")
+            this.fueraDeCombate() -> println("${this.nombre}: No puedo atacar, fui derrotado")
             oponente.fueraDeCombate() -> println("${this.nombre}: Enemigo ya fue derrotado")
             else -> this.realizarAtaque(oponente, this.ataqueSeleccionado)
         }
@@ -48,6 +54,17 @@ interface Pokemon {
 
     fun fueraDeCombate(): Boolean {
         return this.contadorDamage >= this.vida
+    }
+
+    fun vidaRestante(): Int {
+        when {
+            this.contadorDamage >= this.vida -> return 0
+            else -> return this.vida - this.contadorDamage
+        }
+    }
+
+    fun restaurarPkmAlMaximo() {
+        this.contadorDamage = 0
     }
 
     fun modDamageAtaquePrimario(pokemon: Pokemon, modificador: Int) {
