@@ -22,28 +22,68 @@ class PokemonTest {
                      charmy, mantine.iniciarAtaque(charmy))
     }
 
+    @Test fun testChequeoExperienciaRequeridaYAumentoNivel() {
+        val sandslash = GroundPokemon("Sandslash")
+        assertEquals("A nivel 1 se requiere 7 puntos de experiencia para subir a nivel 2",
+                     7, sandslash.experienciaRequeridaSubirNivel())
+        sandslash.experienciaAcumuladaEnNivel += 7
+        assertTrue("Al aumentar la experiencia acumulada en nivel 1 a 7 debe poder subir de nivel",
+                   sandslash.verificarRequisitoExpSubirNivel())
+        sandslash.subirNivel()
+        assertEquals("Al aplicar subirNivel el nivel debe aumentar en 1", 2, sandslash.nivel)
+        assertTrue("La vida debió aumentar al subir de nivel", sandslash.vida > 40)
+        assertTrue("El ataque primario debió aumentar al subir de nivel", sandslash.ataquePrimario > 50)
+        assertTrue("El ataque secundario debió aumentar al subir de nivel", sandslash.ataqueSecundario > 30)
+        assertEquals("Al subir de nivel debe researtearse en 0 la experiencia acumulada para subir de nivel",
+                     0, sandslash.experienciaAcumuladaEnNivel)
+        sandslash.subirNivel()
+        assertEquals("Sin experiencia acumulada en el nivel 2 no puede subir de nivel", 2, sandslash.nivel)
+        sandslash.experienciaAcumuladaEnNivel += 10
+        assertEquals("Sandslash ganó 10 puntos de experiencia", 10, sandslash.experienciaAcumuladaEnNivel)
+        assertFalse("Con 10 puntos de experiencia aún no puede subir de nivel", sandslash.verificarRequisitoExpSubirNivel())
+        sandslash.experienciaAcumuladaEnNivel += 20
+        assertEquals("Sandslash ganó 20 puntos de experiencia, acumulando 30", 30, sandslash.experienciaAcumuladaEnNivel)
+        assertTrue("Con 30 puntos de experiencia puede subir de nivel", sandslash.verificarRequisitoExpSubirNivel())
+        sandslash.subirNivel()
+        assertEquals("Como cumplia el requisito ahora tiene nivel 3", 3, sandslash.nivel)
+        assertEquals("Al subir de nivel, sobraron 11 puntos de experiencia, ahora aplicados a la barra en nivel 3",
+                     11, sandslash.experienciaAcumuladaEnNivel)
+        var c = 3
+        while (c <= 100) {
+            sandslash.experienciaAcumuladaEnNivel += sandslash.experienciaRequeridaSubirNivel()
+            sandslash.subirNivel()
+            c += 1
+        }
+        assertEquals("Sandslash debe ser de nivel 100 ahora", 100, sandslash.nivel)
+        sandslash.experienciaAcumuladaEnNivel += sandslash.experienciaRequeridaSubirNivel()
+        sandslash.subirNivel()
+        assertEquals("100 es el nivel máximo. No puede subir más de nivel", 100, sandslash.nivel)
+        assertEquals("Como se esta en nivel máximo se resetea a 0 la experiencia acumulada del nivel y se mantiene asi",
+                     0, sandslash.experienciaAcumuladaEnNivel)
+    }
+
     @Test fun testPruebaVida() {
         val chikorita = GrassPokemon("Chikorita")
-        assertFalse("Se espera que si un contador de daño en 0, no este fuera de combate", chikorita.fueraDeCombate())
+        assertFalse("Se espera que con un contador de daño en 0, no este fuera de combate", chikorita.fueraDeCombate())
         chikorita.contadorDamage += 210
-        assertTrue("Se espera que con un contador de daño en 210 y una vida de 200, este fuera de combate",
+        assertTrue("Se espera que con un contador de daño en 210 y una vida de 40, este fuera de combate",
                    chikorita.fueraDeCombate())
     }
 
     @Test fun testAtaquePostderrota() {
         val mew = PsychicPokemon("Mew")
         val ratatta = NormalPokemon("Ratatta")
-        ratatta.contadorDamage += 200
+        ratatta.contadorDamage += 100
         assertEquals("Daño actual acumulado en mew deberia ser 0 porque no se ha modificado", 0, mew.contadorDamage)
         ratatta.iniciarAtaque(mew)
         assertEquals("Daño acumulado en Ratatta lo deja fuera de combate y no puede atacar a Mew", 0, mew.contadorDamage)
         mew.iniciarAtaque(ratatta)
-        assertEquals("Mew no puede atacar más a Ratatta porque ya está fuera de combate", 200, ratatta.contadorDamage)
+        assertEquals("Mew no puede atacar más a Ratatta porque ya está fuera de combate", 100, ratatta.contadorDamage)
     }
 
     @Test fun testBatallaConDebilidad() {
-        val squirtle = WaterPokemon("Squirtle")
-        val pikachu = ElectricPokemon("Pikachu")
+        val squirtle = WaterPokemon("Squirtle", vida = 200)
+        val pikachu = ElectricPokemon("Pikachu", vida = 200)
         assertEquals("Sin recibir daño, el contador de daño debe valer 0 para ambos", 0, squirtle.contadorDamage)
         assertEquals("Sin recibir daño, el contador de daño debe valer 0 para ambos", 0, pikachu.contadorDamage)
         assertEquals("No se ha modificado el ataque de Pikachu seleccionado, por lo que deberia ser 1",
@@ -76,8 +116,8 @@ class PokemonTest {
     }
 
     @Test fun testBatallaConFortaleza() {
-        val lucario = FightPokemon("Lucario")
-        val diglett = GroundPokemon("Diglett")
+        val lucario = FightPokemon("Lucario", vida = 200)
+        val diglett = GroundPokemon("Diglett", vida = 200)
         assertEquals("Sin recibir daño, el contador de daño debe valer 0 para ambos", 0, lucario.contadorDamage)
         assertEquals("Sin recibir daño, el contador de daño debe valer 0 para ambos", 0, diglett.contadorDamage)
         assertEquals("No se ha modificado el ataque de Diglett seleccionado, por lo que deberia ser 1",
@@ -118,8 +158,8 @@ class PokemonTest {
     }
 
     @Test fun testBatallaSinVentajas() {
-        val treecko = GrassPokemon("Treecko")
-        val abra = PsychicPokemon("Abra")
+        val treecko = GrassPokemon("Treecko", vida = 200)
+        val abra = PsychicPokemon("Abra", vida = 200)
         assertEquals("Sin recibir daño, el contador de daño debe valer 0 para ambos", 0, abra.contadorDamage)
         assertEquals("Sin recibir daño, el contador de daño debe valer 0 para ambos", 0, treecko.contadorDamage)
         assertEquals("No se ha modificado el ataque de treecko seleccionado, por lo que deberia ser 1", 1, treecko.ataqueSeleccionado)
