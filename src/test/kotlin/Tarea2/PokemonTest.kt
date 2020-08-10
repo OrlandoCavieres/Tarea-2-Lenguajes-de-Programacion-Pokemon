@@ -41,6 +41,9 @@ class PokemonTest {
         sandslash.experienciaAcumuladaEnNivel += 10
         assertEquals("Sandslash ganó 10 puntos de experiencia", 10, sandslash.experienciaAcumuladaEnNivel)
         assertFalse("Con 10 puntos de experiencia aún no puede subir de nivel", sandslash.verificarRequisitoExpSubirNivel())
+        sandslash.subirNivel()
+        assertEquals("Como no es posible subir de nivel se conserva la experiencia actual",
+                     10, sandslash.experienciaAcumuladaEnNivel)
         sandslash.experienciaAcumuladaEnNivel += 20
         assertEquals("Sandslash ganó 20 puntos de experiencia, acumulando 30", 30, sandslash.experienciaAcumuladaEnNivel)
         assertTrue("Con 30 puntos de experiencia puede subir de nivel", sandslash.verificarRequisitoExpSubirNivel())
@@ -48,11 +51,9 @@ class PokemonTest {
         assertEquals("Como cumplia el requisito ahora tiene nivel 3", 3, sandslash.nivel)
         assertEquals("Al subir de nivel, sobraron 11 puntos de experiencia, ahora aplicados a la barra en nivel 3",
                      11, sandslash.experienciaAcumuladaEnNivel)
-        var c = 3
-        while (c <= 100) {
+        while (sandslash.nivel < 100) {
             sandslash.experienciaAcumuladaEnNivel += sandslash.experienciaRequeridaSubirNivel()
             sandslash.subirNivel()
-            c += 1
         }
         assertEquals("Sandslash debe ser de nivel 100 ahora", 100, sandslash.nivel)
         sandslash.experienciaAcumuladaEnNivel += sandslash.experienciaRequeridaSubirNivel()
@@ -143,12 +144,10 @@ class PokemonTest {
                      60, diglett.contadorDamage)
         lucario.seleccionarAtaqueAUsar(1)
         diglett.seleccionarAtaqueAUsar(1)
-        diglett.iniciarAtaque(lucario)
-        lucario.iniciarAtaque(diglett)
-        diglett.iniciarAtaque(lucario)
-        lucario.iniciarAtaque(diglett)
-        diglett.iniciarAtaque(lucario)
-        lucario.iniciarAtaque(diglett)
+        while (!(diglett.fueraDeCombate()) && !(lucario.fueraDeCombate())) {
+            diglett.iniciarAtaque(lucario)
+            lucario.iniciarAtaque(diglett)
+        }
         assertEquals("Finalmente, diglett fue el primero en tener un contador de daño superior a 200, quedando fuera de combate",
                      210, diglett.contadorDamage)
         assertEquals("El contador de daño final de Lucario en esta batalla es de 150", 150, lucario.contadorDamage)
