@@ -1,13 +1,18 @@
 package Tarea2
+import kotlin.math.pow
+
+infix fun Int.elevado(exponente: Int): Int = toDouble().pow(exponente).toInt()
 
 interface Pokemon {
     val nombre: String
-    val vida: Int get() = 200
+    var vida: Int
     val tipo: String get() = "Normal"
     var contadorDamage: Int
-    val ataquePrimario: Int get() = 50
-    val ataqueSecundario: Int get() = 30
+    var ataquePrimario: Int
+    var ataqueSecundario: Int
     var ataqueSeleccionado: Int
+    var nivel: Int
+    var experienciaAcumuladaEnNivel: Int
 
     fun iniciarAtaque(pokemon: Pokemon?): Pokemon? {
         if (pokemon != null) {
@@ -70,6 +75,29 @@ interface Pokemon {
     fun modDamageAtaquePrimario(pokemon: Pokemon, modificador: Int) {
         when (pokemon.ataqueSeleccionado) {
             1 -> this.contadorDamage += pokemon.ataquePrimario + modificador
+        }
+    }
+
+    fun experienciaRequeridaSubirNivel(): Int {
+        return ((this.nivel + 1) elevado 3) - (this.nivel elevado 3)
+    }
+
+    fun verificarRequisitoExpSubirNivel(): Boolean {
+        return this.experienciaAcumuladaEnNivel >= this.experienciaRequeridaSubirNivel()
+    }
+
+    fun subirNivel() {
+        when {
+            verificarRequisitoExpSubirNivel() && this.nivel < 100 && this.nivel >= 1 -> {
+                this.experienciaAcumuladaEnNivel = this.experienciaAcumuladaEnNivel - this.experienciaRequeridaSubirNivel()
+                this.nivel += 1
+                val listaAumentoParametros = listOf(1, 2, 3, 4)
+                this.vida += listaAumentoParametros.random()
+                this.ataquePrimario += listaAumentoParametros.random()
+                this.ataqueSecundario += listaAumentoParametros.random()
+            }
+            verificarRequisitoExpSubirNivel() == false -> {}
+            else -> this.experienciaAcumuladaEnNivel = 0
         }
     }
 }
