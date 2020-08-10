@@ -1,8 +1,14 @@
 package Tarea2
 
-class NormalPokemon(override val nombre: String): Pokemon {
+class NormalPokemon(override val nombre: String,
+                    override var vida: Int = 40,
+                    override var ataquePrimario: Int = 50,
+                    override var ataqueSecundario: Int = 30): Pokemon {
+
     override var contadorDamage = 0
     override var ataqueSeleccionado = 1
+    override var nivel = 1
+    override var experienciaAcumuladaEnNivel = 0
 
     override fun realizarAtaque(oponente: Pokemon, ataque: Int) {
         when (ataque) {
@@ -19,10 +25,16 @@ class NormalPokemon(override val nombre: String): Pokemon {
     }
 }
 
-class FirePokemon(override val nombre: String): Pokemon {
+class FirePokemon(override val nombre: String,
+                  override var vida: Int = 40,
+                  override var ataquePrimario: Int = 50,
+                  override var ataqueSecundario: Int = 30): Pokemon {
+
     override var contadorDamage = 0
     override val tipo = "Fuego"
     override var ataqueSeleccionado = 1
+    override var nivel = 1
+    override var experienciaAcumuladaEnNivel = 0
 
     override fun realizarAtaque(oponente: Pokemon, ataque: Int) {
         when(ataque) {
@@ -44,10 +56,16 @@ class FirePokemon(override val nombre: String): Pokemon {
     }
 }
 
-class WaterPokemon(override val nombre: String): Pokemon {
+class WaterPokemon(override val nombre: String,
+                   override var vida: Int = 40,
+                   override var ataquePrimario: Int = 50,
+                   override var ataqueSecundario: Int = 30): Pokemon {
+
     override var contadorDamage = 0
     override val tipo = "Agua"
     override var ataqueSeleccionado = 1
+    override var nivel = 1
+    override var experienciaAcumuladaEnNivel = 0
 
     override fun realizarAtaque(oponente: Pokemon, ataque: Int) {
         when(ataque) {
@@ -69,10 +87,16 @@ class WaterPokemon(override val nombre: String): Pokemon {
     }
 }
 
-class ElectricPokemon(override val nombre: String): Pokemon {
+class ElectricPokemon(override val nombre: String,
+                      override var vida: Int = 40,
+                      override var ataquePrimario: Int = 50,
+                      override var ataqueSecundario: Int = 30): Pokemon {
+
     override var contadorDamage = 0
     override val tipo = "Electrico"
     override var ataqueSeleccionado = 1
+    override var nivel = 1
+    override var experienciaAcumuladaEnNivel = 0
 
     override fun realizarAtaque(oponente: Pokemon, ataque: Int) {
         when(ataque) {
@@ -90,10 +114,16 @@ class ElectricPokemon(override val nombre: String): Pokemon {
     }
 }
 
-class PsychicPokemon(override val nombre: String): Pokemon {
+class PsychicPokemon(override val nombre: String,
+                     override var vida: Int = 40,
+                     override var ataquePrimario: Int = 50,
+                     override var ataqueSecundario: Int = 30): Pokemon {
+
     override var contadorDamage = 0
     override val tipo = "Psiquico"
     override var ataqueSeleccionado = 1
+    override var nivel = 1
+    override var experienciaAcumuladaEnNivel = 0
 
     override fun realizarAtaque(oponente: Pokemon, ataque: Int) {
         when(ataque) {
@@ -107,10 +137,16 @@ class PsychicPokemon(override val nombre: String): Pokemon {
     }
 }
 
-class GroundPokemon(override val nombre: String): Pokemon {
+class GroundPokemon(override val nombre: String,
+                    override var vida: Int = 40,
+                    override var ataquePrimario: Int = 50,
+                    override var ataqueSecundario: Int = 30): Pokemon {
+
     override var contadorDamage = 0
     override val tipo = "Tierra"
     override var ataqueSeleccionado = 1
+    override var nivel = 1
+    override var experienciaAcumuladaEnNivel = 0
 
     override fun realizarAtaque(oponente: Pokemon, ataque: Int) {
         when(ataque) {
@@ -155,10 +191,16 @@ class GroundPokemon(override val nombre: String): Pokemon {
     }
 }
 
-class FightPokemon(override val nombre: String): Pokemon {
+class FightPokemon(override val nombre: String,
+                   override var vida: Int = 40,
+                   override var ataquePrimario: Int = 50,
+                   override var ataqueSecundario: Int = 30): Pokemon {
+
     override var contadorDamage = 0
     override val tipo = "Lucha"
     override var ataqueSeleccionado = 1
+    override var nivel = 1
+    override var experienciaAcumuladaEnNivel = 0
 
     override fun realizarAtaque(oponente: Pokemon, ataque: Int) {
         when(ataque) {
@@ -176,10 +218,16 @@ class FightPokemon(override val nombre: String): Pokemon {
     }
 }
 
-class GrassPokemon(override val nombre: String): Pokemon {
+class GrassPokemon(override val nombre: String,
+                   override var vida: Int = 40,
+                   override var ataquePrimario: Int = 50,
+                   override var ataqueSecundario: Int = 30): Pokemon {
+
     override var contadorDamage = 0
     override val tipo = "Hierba"
     override var ataqueSeleccionado = 1
+    override var nivel = 1
+    override var experienciaAcumuladaEnNivel = 0
 
     override fun realizarAtaque(oponente: Pokemon, ataque: Int) {
         when(ataque) {
