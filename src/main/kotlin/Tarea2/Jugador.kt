@@ -2,8 +2,8 @@ package Tarea2
 
 class Jugador(override val nombre: String): Entrenador {
     override val equipoPKM: MutableList<Pokemon> = mutableListOf()
-    override var dinero = 3000
-    override var totalPokemonCapturados = 0
+    private var dinero = 3000
+    private var totalPokemonCapturados = 0
 
     protected fun elegirPrimerPokemon(tipo: String) {
         when {
@@ -23,5 +23,13 @@ class Jugador(override val nombre: String): Entrenador {
 
     protected fun verificarCupoMaxEquipoPKM(): Boolean {
         return this.equipoPKM.size <= 6
+    }
+
+    fun mostrarTotalPokemonCapturados(): Int {
+        return this.totalPokemonCapturados
+    }
+
+    fun dineroDisponible(): Int {
+        return this.dinero
     }
 }
