@@ -5,6 +5,7 @@ infix fun Int.elevado(exponente: Int): Int = toDouble().pow(exponente).toInt()
 
 interface Pokemon {
     val nombre: String
+    var apodo: String
     var vida: Int
     val tipo: String get() = "Normal"
     var contadorDamage: Int
@@ -13,6 +14,10 @@ interface Pokemon {
     var ataqueSeleccionado: Int
     var nivel: Int
     var experienciaAcumuladaEnNivel: Int
+
+    fun ponerApodo(nuevoApodo: String) {
+        this.apodo = nuevoApodo
+    }
 
     fun iniciarAtaque(pokemon: Pokemon?): Pokemon? {
         if (pokemon != null) {
@@ -91,7 +96,8 @@ interface Pokemon {
             verificarRequisitoExpSubirNivel() && this.nivel < 100 && this.nivel >= 1 -> {
                 this.experienciaAcumuladaEnNivel = this.experienciaAcumuladaEnNivel - this.experienciaRequeridaSubirNivel()
                 this.nivel += 1
-                val listaAumentoParametros = listOf(1, 2, 3, 4)
+                println("¡${this.nombre} ha subido a nivel ${this.nivel}!")
+                val listaAumentoParametros = listOf(1, 2, 3)
                 this.vida += listaAumentoParametros.random()
                 this.ataquePrimario += listaAumentoParametros.random()
                 this.ataqueSecundario += listaAumentoParametros.random()
@@ -99,5 +105,13 @@ interface Pokemon {
             verificarRequisitoExpSubirNivel() == false -> {}
             else -> this.experienciaAcumuladaEnNivel = 0
         }
+    }
+
+    fun confirmarBatallaPokemonSalvaje(batallaPKM: Batalla): Pokemon {
+        return this
+    }
+
+    fun recibeExperiencia(batallaPKM: Batalla) {
+        batallaPKM.darExperienciaPKM(this)
     }
 }
