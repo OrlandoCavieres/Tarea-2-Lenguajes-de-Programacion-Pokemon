@@ -2,8 +2,27 @@ package Tarea2
 
 interface Entrenador {
     val nombre: String
-    val equipoPokemon: MutableList<Pokemon>
+    var genero: String
+    var nivelAproximado: Int
+    val equipoPokemon: MutableMap<Int, Pokemon> get() = mutableMapOf<Int, Pokemon>()
+    val ordenEquipoPokemon: MutableList<Int> get() = mutableListOf()
     val totalPokemonEnEquipo: Int get() = this.equipoPokemon.size
-    val tipo: String get() = "JUGADOR"
+    val tipoClaseEntrenador: String get() = "JUGADOR"
     val preferenciaTipoPokemon: List<String> get() = listOf("Normal")
+
+    fun recuperarPokemonEnLaPosicionEquipo(posicion: Int): Pokemon? {
+        val nombrePKM = this.ordenEquipoPokemon[posicion]
+        if (this.equipoPokemon[nombrePKM] != null) {
+            return this.equipoPokemon[nombrePKM]
+        }
+        else {
+            return null
+        }
+    }
+
+    fun recuperarPokemonEnCabecera(): Pokemon? {
+        return recuperarPokemonEnLaPosicionEquipo(0)
+    }
+
+    fun confirmarBatalla(batallaPKM: Batalla): Entrenador
 }
