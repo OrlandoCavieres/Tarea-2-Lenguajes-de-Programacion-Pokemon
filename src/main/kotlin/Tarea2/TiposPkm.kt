@@ -9,6 +9,7 @@ class NormalPokemon(override val nombre: String,
     override var ataqueSeleccionado = 1
     override var nivel = 1
     override var experienciaAcumuladaEnNivel = 0
+    override var apodo = nombre
 
     override fun realizarAtaque(oponente: Pokemon, ataque: Int) {
         when (ataque) {
@@ -35,6 +36,7 @@ class FirePokemon(override val nombre: String,
     override var ataqueSeleccionado = 1
     override var nivel = 1
     override var experienciaAcumuladaEnNivel = 0
+    override var apodo = nombre
 
     override fun realizarAtaque(oponente: Pokemon, ataque: Int) {
         when(ataque) {
@@ -66,6 +68,7 @@ class WaterPokemon(override val nombre: String,
     override var ataqueSeleccionado = 1
     override var nivel = 1
     override var experienciaAcumuladaEnNivel = 0
+    override var apodo = nombre
 
     override fun realizarAtaque(oponente: Pokemon, ataque: Int) {
         when(ataque) {
@@ -97,6 +100,7 @@ class ElectricPokemon(override val nombre: String,
     override var ataqueSeleccionado = 1
     override var nivel = 1
     override var experienciaAcumuladaEnNivel = 0
+    override var apodo = nombre
 
     override fun realizarAtaque(oponente: Pokemon, ataque: Int) {
         when(ataque) {
@@ -124,6 +128,7 @@ class PsychicPokemon(override val nombre: String,
     override var ataqueSeleccionado = 1
     override var nivel = 1
     override var experienciaAcumuladaEnNivel = 0
+    override var apodo = nombre
 
     override fun realizarAtaque(oponente: Pokemon, ataque: Int) {
         when(ataque) {
@@ -147,6 +152,7 @@ class GroundPokemon(override val nombre: String,
     override var ataqueSeleccionado = 1
     override var nivel = 1
     override var experienciaAcumuladaEnNivel = 0
+    override var apodo = nombre
 
     override fun realizarAtaque(oponente: Pokemon, ataque: Int) {
         when(ataque) {
@@ -201,6 +207,7 @@ class FightPokemon(override val nombre: String,
     override var ataqueSeleccionado = 1
     override var nivel = 1
     override var experienciaAcumuladaEnNivel = 0
+    override var apodo = nombre
 
     override fun realizarAtaque(oponente: Pokemon, ataque: Int) {
         when(ataque) {
@@ -228,6 +235,7 @@ class GrassPokemon(override val nombre: String,
     override var ataqueSeleccionado = 1
     override var nivel = 1
     override var experienciaAcumuladaEnNivel = 0
+    override var apodo = nombre
 
     override fun realizarAtaque(oponente: Pokemon, ataque: Int) {
         when(ataque) {
