@@ -7,7 +7,7 @@ class Jugador(override val nombre: String): Entrenador {
     protected var pokemonPCALGUIEN: MutableMap<Int, Pokemon> = mutableMapOf<Int, Pokemon>()
     private var dinero = 3000
     private var totalPokemonCapturados = 0
-    override var genero = "Hombre"
+    override var genero = "Masculino"
     override var nivelAproximado = this.calcularNivelAproximadoEquipo()
 
     protected fun elegirPrimerPokemon(tipo: String) {
