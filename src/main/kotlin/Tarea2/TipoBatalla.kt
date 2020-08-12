@@ -1,0 +1,144 @@
+package Tarea2
+import kotlin.math.round
+
+class BatallaContraPokemonSalvaje(override val jugador: Jugador, override val salvaje: Pokemon): Batalla {
+    override val oponente: Entrenador? = null
+    override var participanteActivo = 1
+    override var turnoProgresoBatalla = 0
+    override var condicionFinalBatalla = ""
+
+    override fun mensajeInicioBatalla() {
+        println("¡Ha aparecido un ${salvaje.nombre} salvaje y te ha cortado el paso!")
+    }
+
+    override fun primerTurno() {
+        this.mensajeInicioBatalla()
+        this.quienEmpieza()
+        this.desarrolloTurnoAtaque(this.confirmarJugador(this.jugador), this.confirmarOponente(this.salvaje))
+    }
+
+    override fun escaparBatalla(jugador: Jugador) {
+        jugador.escaparBatalla(this)
+    }
+
+    override fun turnoAtaqueJugador(jugador: Jugador) {
+        val pkmActivo = jugador.recuperarPokemonEnCabecera()
+        when (this.verificarDerrotaOponente()) {
+            true -> this.finBatalla("OponenteDerrotado")
+            false -> {pkmActivo!!.iniciarAtaque(this.salvaje)
+                      this.cambiarParticipanteActivo()}
+        }
+    }
+
+    override fun turnoAtaqueOponente(entrenador: Entrenador) {}
+    override fun turnoAtaqueOponente(pkmSalvaje: Pokemon) {
+        val pkmActivo = this.jugador.recuperarPokemonEnCabecera()
+        when {
+            this.verificarDerrotaJugador() -> this.finBatalla("JugadorDerrotado")
+            pkmActivo!!.fueraDeCombate() -> {println("${pkmActivo.nombre} ha sido derrotado. Elija otro pokemon.")
+                                             this.jugador.obtenerPkmNoDerrotadoACabecera()
+                                             pkmSalvaje.iniciarAtaque(this.jugador.recuperarPokemonEnCabecera())
+                                             this.cambiarParticipanteActivo()}
+            else -> {pkmSalvaje.iniciarAtaque(pkmActivo)
+                     this.cambiarParticipanteActivo()}
+        }
+    }
+
+    override fun desarrolloTurnoAtaque(jugador: Jugador, oponente: Entrenador) {}
+
+    override fun desarrolloTurnoAtaque(jugador: Jugador, oponente: Pokemon) {
+        when (this.participanteActivo) {
+            1 -> turnoAtaqueJugador(this.confirmarJugador(this.jugador))
+            2 -> turnoAtaqueOponente(this.confirmarOponente(this.salvaje))
+        }
+        this.turnoProgresoBatalla += 1
+    }
+
+    override fun capturarPokemon() {
+        val numAzar = (0..100).toList().random()
+        when (numAzar) {
+            0 -> println("No se puede capturar un pokemon debilitado.")
+            in 1..porcentajeProbabilidadCaptura() -> this.finBatalla("Captura")
+            else -> {println("¡Oh, mala suerte, ${this.salvaje.nombre} no ha sido capturado!")
+                     this.turnoProgresoBatalla += 1
+                     this.cambiarParticipanteActivo()}
+        }
+    }
+
+    override fun deseaPonerApodo(decision: Boolean, nuevoApodo: String) {
+        when (decision) {
+            true -> this.salvaje.ponerApodo(nuevoApodo)
+            false -> this.salvaje.ponerApodo(this.salvaje.nombre)
+        }
+    }
+
+    override fun addPokemonCapturado() {
+        if (this.condicionFinalBatalla == "Captura") {
+            this.jugador.addPokemon(this.salvaje)
+        }
+        else {println("No se puede capturar al pokemon")}
+    }
+
+    override fun probabilidadEscape() {
+        val eleccionRandom = listOf(1, 2, 3, 4, 5).random()
+        when (eleccionRandom) {
+            3 -> {println("No has logrado escapar")
+                  this.turnoProgresoBatalla += 1
+                  this.cambiarParticipanteActivo()}
+            1, 2, 4, 5 -> {println("Has escapado sin problemas")
+                           this.condicionFinalBatalla = "Escape"}
+        }
+    }
+
+    override fun mensajeDerrotaOponente() {
+        println("¡El ${this.salvaje.nombre} salvaje se ha debilitado!")
+    }
+
+    override fun darExperienciaPKM(pokemon: Pokemon) {
+        val experienciaGanada = (this.salvaje.nivel * (this.salvaje.nivel elevado 3) * 1) / 7
+        pokemon.experienciaAcumuladaEnNivel += experienciaGanada
+        println("${pokemon.nombre} ha ganado ${experienciaGanada} puntos de experiencia.")
+        pokemon.subirNivel()
+    }
+
+    override fun resultadoDerrotaPkmOponente() {
+        val pkmActivo = this.jugador.recuperarPokemonEnCabecera()
+        this.darExperienciaPKM(pkmActivo!!)
+    }
+
+    override fun resultadoVictoriaJugador() {
+        this.resultadoDerrotaPkmOponente()
+    }
+
+    override fun verificarDerrotaOponente(): Boolean {
+        return this.salvaje.fueraDeCombate()
+    }
+}
+
+class BatallaContraOtroEntrenador(override val jugador: Jugador, override val oponente: Entrenador): Batalla {
+    override var participanteActivo = 1
+    override var turnoProgresoBatalla = 0
+    override var condicionFinalBatalla = ""
+    override val capturaPermitida = false
+
+    override fun mensajeInicioBatalla() {}
+    override fun primerTurno() {}
+    override fun turnoAtaqueOponente(pkmSalvaje: Pokemon) {}
+    override fun turnoAtaqueOponente(entrenador: Entrenador) {}
+    override fun turnoAtaqueJugador(jugador: Jugador) {}
+    override fun desarrolloTurnoAtaque(jugador: Jugador, oponente: Pokemon) {}
+    override fun desarrolloTurnoAtaque(jugador: Jugador, oponente: Entrenador) {}
+    override fun verificarDerrotaOponente(): Boolean {return true}
+    fun verificarDerrotaPokemonActualOponente(): Boolean {return true}
+
+    override fun capturarPokemon() {}
+    override fun addPokemonCapturado() {}
+    override fun deseaPonerApodo(decision: Boolean, nuevoApodo: String) {}
+    override fun escaparBatalla(jugador: Jugador) {}
+    override fun probabilidadEscape() {}
+
+    override fun mensajeDerrotaOponente() {}
+    override fun resultadoDerrotaPkmOponente() {}
+    override fun resultadoVictoriaJugador() {}
+    override fun darExperienciaPKM(pokemon: Pokemon) {}
+}
