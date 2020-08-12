@@ -10,6 +10,8 @@ interface Entrenador {
     val tipoClaseEntrenador: String get() = "JUGADOR"
     val preferenciaTipoPokemon: List<String> get() = listOf("Normal")
     val sizeMinimoEquipoPokemon: Int get() = 1
+    val mensajeInicial: String get() = "JUGADOR"
+    val mensajeDerrota: String get() = "JUGADOR"
 
     fun recuperarPokemonEnLaPosicionEquipo(posicion: Int): Pokemon? {
         val nombrePKM = this.ordenEquipoPokemon[posicion]
