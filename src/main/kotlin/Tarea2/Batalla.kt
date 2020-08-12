@@ -73,18 +73,12 @@ interface Batalla {
     fun resultadoVictoriaJugador()
     fun darExperienciaPKM(pokemon: Pokemon) {}
 
-    fun resultadoDerrotaPkmOponente() {
-        val pkmActivo = this.jugador.recuperarPokemonEnCabecera()
-        this.darExperienciaPKM(pkmActivo!!)
-    }
-
     fun finBatalla(opcion: String) {
         when (opcion) {
             "Escape" -> this.probabilidadEscape()
             "JugadorDerrotado" -> {println("Has perdido la batalla. Serás transportado al centro pokemon más cercano.")
                                    this.condicionFinalBatalla = "JugadorDerrotado"}
-            "OponenteDerrotado" -> {println(this.mensajeDerrotaOponente())
-                                    this.resultadoVictoriaJugador()
+            "OponenteDerrotado" -> {this.resultadoVictoriaJugador()
                                     this.condicionFinalBatalla = "OponenteDerrotado"}
             "Captura" -> {println("El pokemon ha sido capturado con exito")
                           this.condicionFinalBatalla = "Captura"}
