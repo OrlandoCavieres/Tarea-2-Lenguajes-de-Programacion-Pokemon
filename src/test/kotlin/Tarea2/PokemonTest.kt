@@ -82,6 +82,46 @@ class PokemonTest {
         assertEquals("Mew no puede atacar más a Ratatta porque ya está fuera de combate", 100, ratatta.contadorDamage)
     }
 
+    @Test fun testCorrectFirstDamageEntreClasesPokemon() {
+        val testDamageReducido =
+            listOf(PsychicPokemon("P") to NormalPokemon("P"), GrassPokemon("G") to FirePokemon("F"), FirePokemon("F") to WaterPokemon("W"),
+                   ElectricPokemon("E") to ElectricPokemon("E"), NormalPokemon("N") to GroundPokemon("G"), ElectricPokemon("E") to GroundPokemon("G"),
+                   GroundPokemon("G") to FightPokemon("F"), WaterPokemon("W") to GrassPokemon("G"), GroundPokemon("G") to GrassPokemon("G"))
+        for (par in testDamageReducido) {
+            (par.first).iniciarAtaque(par.second)
+            assertEquals("${par.first.tipo} haga daño reducido a ${par.second.tipo}", 30, par.second.contadorDamage)
+        }
+        val testDamageAumentado =
+            listOf(FightPokemon("F") to NormalPokemon("N"), WaterPokemon("W") to FirePokemon("F"), GroundPokemon("G") to FirePokemon("F"),
+                   GrassPokemon("G") to WaterPokemon("W"), ElectricPokemon("E") to WaterPokemon("W"), GroundPokemon("G") to ElectricPokemon("E"),
+                   PsychicPokemon("P") to PsychicPokemon("P"), WaterPokemon("W") to GroundPokemon("G"), GrassPokemon("G") to GroundPokemon("G"),
+                   PsychicPokemon("P") to FightPokemon("F"), FirePokemon("F") to GrassPokemon("G"))
+        for (par in testDamageAumentado) {
+            (par.first).iniciarAtaque(par.second)
+            assertEquals("${par.first.tipo} haga daño aumentado a ${par.second.tipo}", 70, par.second.contadorDamage)
+        }
+        val testDamageRegular =
+            listOf(NormalPokemon("N") to NormalPokemon("N"), NormalPokemon("N") to FirePokemon("F"), NormalPokemon("N") to WaterPokemon("W"),
+                   NormalPokemon("N") to ElectricPokemon("E"), NormalPokemon("N") to PsychicPokemon("P"), NormalPokemon("N") to FightPokemon("F"),
+                   NormalPokemon("N") to GrassPokemon("G"), FirePokemon("F") to NormalPokemon("N"), FirePokemon("F") to FirePokemon("F"),
+                   FirePokemon("F") to ElectricPokemon("E"), FirePokemon("F") to PsychicPokemon("P"), FirePokemon("F") to GroundPokemon("G"),
+                   FirePokemon("F") to FightPokemon("F"), WaterPokemon("W") to NormalPokemon("N"), WaterPokemon("W") to WaterPokemon("W"),
+                   WaterPokemon("W") to ElectricPokemon("E"), WaterPokemon("W") to PsychicPokemon("P"), WaterPokemon("W") to FightPokemon("F"),
+                   ElectricPokemon("E") to NormalPokemon("N"), ElectricPokemon("E") to FirePokemon("F"), ElectricPokemon("E") to PsychicPokemon("P"),
+                   ElectricPokemon("E") to FightPokemon("F"), ElectricPokemon("E") to GrassPokemon("G"), PsychicPokemon("P") to FirePokemon("F"),
+                   PsychicPokemon("P") to WaterPokemon("W"), PsychicPokemon("P") to ElectricPokemon("E"), PsychicPokemon("P") to GroundPokemon("G"),
+                   PsychicPokemon("P") to GrassPokemon("G"), GroundPokemon("G") to NormalPokemon("N"), GroundPokemon("G") to WaterPokemon("W"),
+                   GroundPokemon("G") to PsychicPokemon("P"), GroundPokemon("G") to GroundPokemon("G"), FightPokemon("F") to FirePokemon("F"),
+                   FightPokemon("F") to WaterPokemon("W"), FightPokemon("F") to ElectricPokemon("E"), FightPokemon("F") to PsychicPokemon("P"),
+                   FightPokemon("F") to GroundPokemon("G"), FightPokemon("F") to FightPokemon("F"), FightPokemon("F") to GrassPokemon("G"),
+                   GrassPokemon("G") to NormalPokemon("N"), GrassPokemon("G") to ElectricPokemon("E"), GrassPokemon("G") to PsychicPokemon("P"),
+                   GrassPokemon("G") to FightPokemon("F"), GrassPokemon("G") to GrassPokemon("G"))
+        for (par in testDamageRegular) {
+            (par.first).iniciarAtaque(par.second)
+            assertEquals("${par.first.tipo} haga daño regular a ${par.second.tipo}", 50, par.second.contadorDamage)
+        }
+    }
+
     @Test fun testBatallaConDebilidad() {
         val squirtle = WaterPokemon("Squirtle", vida = 200)
         val pikachu = ElectricPokemon("Pikachu", vida = 200)
