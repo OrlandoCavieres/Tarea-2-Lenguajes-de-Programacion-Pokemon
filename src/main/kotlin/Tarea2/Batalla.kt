@@ -32,10 +32,8 @@ interface Batalla {
         return contrincante.confirmarBatalla(this)
     }
 
-    fun mensajeInicioBatalla()
-
+    fun mensajeInicioBatalla(): String
     fun primerTurno()
-
     fun turnoAtaqueJugador(jugador: Jugador)
     fun turnoAtaqueOponente(pkmSalvaje: Pokemon)
     fun turnoAtaqueOponente(entrenador: Entrenador)
@@ -54,34 +52,26 @@ interface Batalla {
     }
 
     fun verificarDerrotaOponente(): Boolean
-
     fun capturarPokemon()
 
     fun porcentajeProbabilidadCaptura(): Int {
-        when {
-            this.salvaje.vidaRestante() == this.salvaje.vida -> return 30
-            this.salvaje.vidaRestante() >= this.salvaje.vida * 0.5 -> return 60
-            this.salvaje.vidaRestante() >= this.salvaje.vida * 0.3 -> return 80
-            this.salvaje.vidaRestante() >= this.salvaje.vida * 0.1 -> return 95
-            this.salvaje.vidaRestante() >= 1 -> return 100
-            else -> return 0
+        return when {
+            this.salvaje.vidaRestante() == this.salvaje.vida -> 30
+            this.salvaje.vidaRestante() >= this.salvaje.vida * 0.5 -> 60
+            this.salvaje.vidaRestante() >= this.salvaje.vida * 0.3 -> 80
+            this.salvaje.vidaRestante() >= this.salvaje.vida * 0.1 -> 95
+            this.salvaje.vidaRestante() >= 1 -> 100
+            else -> 0
         }
     }
 
     fun addPokemonCapturado()
-
     fun deseaPonerApodo(decision: Boolean, nuevoApodo: String)
-
     fun escaparBatalla(jugador: Jugador)
-
     fun probabilidadEscape()
-
-    fun mensajeDerrotaOponente()
-
+    fun mensajeDerrotaOponente(): String
     fun resultadoDerrotaPkmOponente()
-
     fun resultadoVictoriaJugador()
-
     fun darExperienciaPKM(pokemon: Pokemon)
 
     fun finBatalla(opcion: String) {
@@ -89,7 +79,7 @@ interface Batalla {
             "Escape" -> this.probabilidadEscape()
             "JugadorDerrotado" -> {println("Has perdido la batalla. Serás transportado al centro pokemon más cercano.")
                                    this.condicionFinalBatalla = "JugadorDerrotado"}
-            "OponenteDerrotado" -> {this.mensajeDerrotaOponente()
+            "OponenteDerrotado" -> {println(this.mensajeDerrotaOponente())
                                     this.resultadoVictoriaJugador()
                                     this.condicionFinalBatalla = "OponenteDerrotado"}
             "Captura" -> {println("El pokemon ha sido capturado con exito")

@@ -67,9 +67,9 @@ interface Pokemon {
     }
 
     fun vidaRestante(): Int {
-        when {
-            this.contadorDamage >= this.vida -> return 0
-            else -> return this.vida - this.contadorDamage
+        return when {
+            this.contadorDamage >= this.vida -> 0
+            else -> this.vida - this.contadorDamage
         }
     }
 
@@ -102,7 +102,7 @@ interface Pokemon {
                 this.ataquePrimario += listaAumentoParametros.random()
                 this.ataqueSecundario += listaAumentoParametros.random()
             }
-            verificarRequisitoExpSubirNivel() == false -> {}
+            !verificarRequisitoExpSubirNivel() -> {}
             else -> this.experienciaAcumuladaEnNivel = 0
         }
     }

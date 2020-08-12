@@ -1,10 +1,10 @@
 package Tarea2
 
-class Jugador(override val nombre: String): Entrenador {
+open class Jugador(override val nombre: String): Entrenador {
     override val equipoPokemon: MutableMap<Int, Pokemon> = mutableMapOf<Int, Pokemon>()
     override val ordenEquipoPokemon: MutableList<Int> = mutableListOf()
-    protected var derrotados = mutableListOf(false, false, false, false, false, false)
-    protected var pokemonPCALGUIEN: MutableMap<Int, Pokemon> = mutableMapOf<Int, Pokemon>()
+    private var derrotados = mutableListOf(false, false, false, false, false, false)
+    private var pokemonPCALGUIEN: MutableMap<Int, Pokemon> = mutableMapOf<Int, Pokemon>()
     private var dinero = 3000
     private var totalPokemonCapturados = 0
     override var genero = "Masculino"
@@ -33,7 +33,7 @@ class Jugador(override val nombre: String): Entrenador {
         }
     }
 
-    protected fun verificarCupoDisponibleEquipoPKM(): Boolean {
+    private fun verificarCupoDisponibleEquipoPKM(): Boolean {
         return this.equipoPokemon.size <= 6
     }
 
@@ -73,17 +73,17 @@ class Jugador(override val nombre: String): Entrenador {
     fun verificarEstadoPokemonEquipo() {
         for (posicion in 0..ordenEquipoPokemon.size) {
             val idPKM = this.ordenEquipoPokemon[posicion]
-            if (this.equipoPokemon[idPKM]!!.fueraDeCombate()) {
-                this.derrotados[posicion] = true
+            when (this.equipoPokemon[idPKM]!!.fueraDeCombate()) {
+                true -> this.derrotados[posicion] = true
+                else -> this.derrotados[posicion] = false
             }
-            else {this.derrotados[posicion] = false}
         }
     }
 
     fun obtenerPkmNoDerrotadoACabecera() {
         this.verificarEstadoPokemonEquipo()
         for (posicion in 0..this.derrotados.size) {
-            if (this.derrotados[posicion] == false) {
+            if (!this.derrotados[posicion]) {
                 this.cambiarOrdenPokemonEnEquipo(posicion, 0)
                 break
             }
@@ -105,10 +105,10 @@ class Jugador(override val nombre: String): Entrenador {
         }
     }
 
-    protected fun recuperarPosicionPokemonEnEquipo(idPKM: Int): Int {
-        when {
-            ordenEquipoPokemon.contains(idPKM) -> return ordenEquipoPokemon.indexOf(idPKM)
-            else -> return -1
+    private fun recuperarPosicionPokemonEnEquipo(idPKM: Int): Int {
+        return when {
+            ordenEquipoPokemon.contains(idPKM) -> ordenEquipoPokemon.indexOf(idPKM)
+            else -> -1
         }
     }
 

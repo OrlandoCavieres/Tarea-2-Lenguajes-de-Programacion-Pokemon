@@ -15,12 +15,10 @@ interface Entrenador {
 
     fun recuperarPokemonEnLaPosicionEquipo(posicion: Int): Pokemon? {
         val nombrePKM = this.ordenEquipoPokemon[posicion]
-        if (this.equipoPokemon[nombrePKM] != null) {
-            return this.equipoPokemon[nombrePKM]
+        return if (this.equipoPokemon[nombrePKM] != null) {
+            this.equipoPokemon[nombrePKM]
         }
-        else {
-            return null
-        }
+        else {null}
     }
 
     fun recuperarPokemonEnCabecera(): Pokemon? {
