@@ -122,6 +122,43 @@ class PokemonTest {
         }
     }
 
+    @Test fun testCorrectSecondDamageEntreClasesPokemon() {
+        val testDamageReducido =
+            listOf(NormalPokemon("N") to GroundPokemon("G"), FirePokemon("F") to GroundPokemon("G"), WaterPokemon("W") to GroundPokemon("G"),
+                   ElectricPokemon("E") to GroundPokemon("G"), PsychicPokemon("P") to GroundPokemon("G"), GroundPokemon("G") to GroundPokemon("G"),
+                   FightPokemon("F") to GroundPokemon("G"), GrassPokemon("G") to GroundPokemon("G"))
+        for (par in testDamageReducido) {
+            (par.first).seleccionarAtaqueAUsar(2)
+            (par.first).iniciarAtaque(par.second)
+            assertEquals("${par.first.tipo} haga daño reducido a ${par.second.tipo}", 10, par.second.contadorDamage)
+        }
+        val testDamageRegular =
+            listOf(NormalPokemon("N") to NormalPokemon("N"), NormalPokemon("N") to FirePokemon("F"), NormalPokemon("N") to WaterPokemon("W"),
+                   NormalPokemon("N") to ElectricPokemon("E"), NormalPokemon("N") to PsychicPokemon("P"), NormalPokemon("N") to FightPokemon("F"),
+                   NormalPokemon("N") to GrassPokemon("G"), FirePokemon("F") to NormalPokemon("N"), FirePokemon("F") to FirePokemon("F"),
+                   FirePokemon("F") to ElectricPokemon("E"), FirePokemon("F") to PsychicPokemon("P"), FirePokemon("F") to FightPokemon("F"),
+                   FirePokemon("F") to GrassPokemon("G"), WaterPokemon("W") to NormalPokemon("N"), WaterPokemon("W") to FirePokemon("F"),
+                   WaterPokemon("W") to WaterPokemon("W"), WaterPokemon("W") to ElectricPokemon("E"), WaterPokemon("W") to PsychicPokemon("P"),
+                   WaterPokemon("W") to FightPokemon("F"), WaterPokemon("W") to GrassPokemon("G"), ElectricPokemon("E") to NormalPokemon("N"),
+                   ElectricPokemon("E") to FirePokemon("F"), ElectricPokemon("E") to WaterPokemon("W"), ElectricPokemon("E") to ElectricPokemon("E"),
+                   ElectricPokemon("E") to PsychicPokemon("P"), ElectricPokemon("E") to FightPokemon("F"), ElectricPokemon("E") to GrassPokemon("G"),
+                   PsychicPokemon("P") to NormalPokemon("N"), PsychicPokemon("P") to FirePokemon("F"), PsychicPokemon("P") to WaterPokemon("W"),
+                   PsychicPokemon("P") to ElectricPokemon("E"), PsychicPokemon("P") to PsychicPokemon("P"), PsychicPokemon("P") to FightPokemon("F"),
+                   PsychicPokemon("P") to GrassPokemon("G"), GroundPokemon("G") to NormalPokemon("N"), GroundPokemon("G") to FirePokemon("F"),
+                   GroundPokemon("G") to WaterPokemon("W"), GroundPokemon("G") to ElectricPokemon("E"), GroundPokemon("G") to PsychicPokemon("P"),
+                   GroundPokemon("G") to FightPokemon("F"), GroundPokemon("G") to GrassPokemon("G"), FightPokemon("F") to NormalPokemon("N"),
+                   FightPokemon("F") to FirePokemon("F"), FightPokemon("F") to WaterPokemon("W"), FightPokemon("F") to ElectricPokemon("E"),
+                   FightPokemon("F") to PsychicPokemon("P"), FightPokemon("F") to FightPokemon("F"), FightPokemon("F") to GrassPokemon("G"),
+                   GrassPokemon("G") to NormalPokemon("N"), GrassPokemon("G") to FirePokemon("F"), GrassPokemon("G") to WaterPokemon("W"),
+                   GrassPokemon("G") to ElectricPokemon("E"), GrassPokemon("G") to PsychicPokemon("P"), GrassPokemon("G") to FightPokemon("F"),
+                   GrassPokemon("G") to GrassPokemon("G"))
+        for (par in testDamageRegular) {
+            (par.first).seleccionarAtaqueAUsar(2)
+            (par.first).iniciarAtaque(par.second)
+            assertEquals("${par.first.tipo} haga daño regular a ${par.second.tipo}", 30, par.second.contadorDamage)
+        }
+    }
+
     @Test fun testBatallaConDebilidad() {
         val squirtle = WaterPokemon("Squirtle", vida = 200)
         val pikachu = ElectricPokemon("Pikachu", vida = 200)
