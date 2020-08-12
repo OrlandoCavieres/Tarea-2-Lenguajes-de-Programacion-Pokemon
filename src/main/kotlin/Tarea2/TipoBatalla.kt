@@ -142,17 +142,34 @@ class BatallaContraOtroEntrenador(override val jugador: Jugador, override val op
         this.turnoProgresoBatalla += 1
     }
 
-    override fun verificarDerrotaOponente(): Boolean {return true}
-    fun verificarDerrotaPokemonActualOponente(): Boolean {return true}
+    override fun verificarDerrotaOponente(): Boolean {
+        var cuentaVencidos = 0
+        for (pkm in confirmarOponente(this.oponente).equipoPokemon.values) {
+            if (pkm.fueraDeCombate()) {
+                cuentaVencidos += 1
+            }
+        }
+        return cuentaVencidos == this.oponente.totalPokemonEnEquipo
+    }
 
     override fun mensajeDerrotaOponente(): String {
         return this.oponente.mensajeDerrota
     }
-    override fun resultadoDerrotaPkmOponente() {}
-    override fun resultadoVictoriaJugador() {}
-    override fun darExperienciaPKM(pokemon: Pokemon) {}
 
-    // No atribuibles a entrenador por lo que no deben hacer nada
+    override fun resultadoDerrotaPkmOponente() {}
+
+    // sumar dinero
+    override fun resultadoVictoriaJugador() {}
+
+    override fun darExperienciaPKM(pokemon: Pokemon) {
+        val experienciaGanada = ((this.oponente.recuperarPokemonEnCabecera()!!.nivel *
+                                 (this.oponente.recuperarPokemonEnCabecera()!!.nivel elevado 3) * 1.5) / 7).toInt()
+        pokemon.experienciaAcumuladaEnNivel += experienciaGanada
+        println("${pokemon.nombre} ha ganado ${experienciaGanada} puntos de experiencia.")
+        pokemon.subirNivel()
+    }
+
+    // No atribuibles a batalla contra entrenador por lo que no deben hacer nada
     override fun desarrolloTurnoAtaque(jugador: Jugador, oponente: Pokemon) {}
     override fun turnoAtaqueOponente(pkmSalvaje: Pokemon) {}
     override fun capturarPokemon() {}
