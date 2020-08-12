@@ -3,7 +3,6 @@ package Tarea2
 open class Jugador(override val nombre: String): Entrenador {
     override val equipoPokemon: MutableMap<Int, Pokemon> = mutableMapOf<Int, Pokemon>()
     override val ordenEquipoPokemon: MutableList<Int> = mutableListOf()
-    private var derrotados = mutableListOf(false, false, false, false, false, false)
     private var pokemonPCALGUIEN: MutableMap<Int, Pokemon> = mutableMapOf<Int, Pokemon>()
     private var dinero = 3000
     private var totalPokemonCapturados = 0
@@ -68,33 +67,6 @@ open class Jugador(override val nombre: String): Entrenador {
                      this.ordenEquipoPokemon.add(this.totalPokemonCapturados)}
             false -> this.pokemonPCALGUIEN[this.totalPokemonCapturados] = pokemon
         }
-    }
-
-    fun verificarEstadoPokemonEquipo() {
-        for (posicion in 0..ordenEquipoPokemon.size) {
-            val idPKM = this.ordenEquipoPokemon[posicion]
-            when (this.equipoPokemon[idPKM]!!.fueraDeCombate()) {
-                true -> this.derrotados[posicion] = true
-                else -> this.derrotados[posicion] = false
-            }
-        }
-    }
-
-    fun obtenerPkmNoDerrotadoACabecera() {
-        this.verificarEstadoPokemonEquipo()
-        for (posicion in 0..this.derrotados.size) {
-            if (!this.derrotados[posicion]) {
-                this.cambiarOrdenPokemonEnEquipo(posicion, 0)
-                break
-            }
-        }
-    }
-
-    protected fun cambiarOrdenPokemonEnEquipo(posicionActual: Int, posicionNueva: Int) {
-        val pkmEnPosActual = this.ordenEquipoPokemon[posicionActual]
-        val pkmEnPosNueva = this.ordenEquipoPokemon[posicionNueva]
-        this.ordenEquipoPokemon[posicionActual] = pkmEnPosNueva
-        this.ordenEquipoPokemon[posicionNueva] = pkmEnPosActual
     }
 
     protected fun elegirPokemonCabeceraEquipo(idPKM: Int) {
