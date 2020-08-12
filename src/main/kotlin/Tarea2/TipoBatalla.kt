@@ -23,35 +23,37 @@ class BatallaContraPokemonSalvaje(override val jugador: Jugador, override val sa
 
     override fun turnoAtaqueJugador(jugador: Jugador) {
         val pkmActivo = jugador.recuperarPokemonEnCabecera()
+        pkmActivo!!.iniciarAtaque(this.salvaje)
         when (this.verificarDerrotaOponente()) {
-            true -> this.finBatalla("OponenteDerrotado")
-            false -> {pkmActivo!!.iniciarAtaque(this.salvaje)
-                      this.cambiarParticipanteActivo()}
+            true -> {println(this.mensajeDerrotaOponente())
+                     this.darExperienciaPKM(pkmActivo)
+                     this.finBatalla("OponenteDerrotado")}
+            false -> this.cambiarParticipanteActivo()
         }
     }
 
     override fun turnoAtaqueOponente(entrenador: Entrenador) {}
     override fun turnoAtaqueOponente(pkmSalvaje: Pokemon) {
         val pkmActivo = this.jugador.recuperarPokemonEnCabecera()
-        when {
-            this.verificarDerrotaJugador() -> this.finBatalla("JugadorDerrotado")
-            pkmActivo!!.fueraDeCombate() -> {println("${pkmActivo.nombre} ha sido derrotado. Elija otro pokemon.")
-                                             this.jugador.obtenerPkmNoDerrotadoACabecera()
-                                             pkmSalvaje.iniciarAtaque(this.jugador.recuperarPokemonEnCabecera())
-                                             this.cambiarParticipanteActivo()}
-            else -> {pkmSalvaje.iniciarAtaque(pkmActivo)
-                     this.cambiarParticipanteActivo()}
+        pkmSalvaje.iniciarAtaque(pkmActivo)
+        when (pkmActivo!!.fueraDeCombate()) {
+            true -> when (this.verificarDerrotaJugador()) {
+                        true -> this.finBatalla("JugadorDerrotado")
+                        else -> {this.jugador.obtenerPkmNoDerrotadoACabecera()
+                                 this.cambiarParticipanteActivo()}
+                    }
+            else -> this.cambiarParticipanteActivo()
         }
     }
 
     override fun desarrolloTurnoAtaque(jugador: Jugador, oponente: Entrenador) {}
 
     override fun desarrolloTurnoAtaque(jugador: Jugador, oponente: Pokemon) {
+        this.turnoProgresoBatalla += 1
         when (this.participanteActivo) {
             1 -> turnoAtaqueJugador(this.confirmarJugador(this.jugador))
             2 -> turnoAtaqueOponente(this.confirmarOponente(this.salvaje))
         }
-        this.turnoProgresoBatalla += 1
     }
 
     override fun capturarPokemon() {
@@ -101,14 +103,7 @@ class BatallaContraPokemonSalvaje(override val jugador: Jugador, override val sa
         pokemon.subirNivel()
     }
 
-    override fun resultadoDerrotaPkmOponente() {
-        val pkmActivo = this.jugador.recuperarPokemonEnCabecera()
-        this.darExperienciaPKM(pkmActivo!!)
-    }
-
-    override fun resultadoVictoriaJugador() {
-        this.resultadoDerrotaPkmOponente()
-    }
+    override fun resultadoVictoriaJugador() {}
 
     override fun verificarDerrotaOponente(): Boolean {
         return this.salvaje.fueraDeCombate()
@@ -131,15 +126,43 @@ class BatallaContraOtroEntrenador(override val jugador: Jugador, override val op
         this.desarrolloTurnoAtaque(this.confirmarJugador(this.jugador), this.confirmarOponente(this.oponente))
     }
 
-    override fun turnoAtaqueOponente(entrenador: Entrenador) {}
-    override fun turnoAtaqueJugador(jugador: Jugador) {}
+    override fun turnoAtaqueOponente(entrenador: Entrenador) {
+        val pkmActivoJugador = this.jugador.recuperarPokemonEnCabecera()
+        val pkmActivoOponente = entrenador.recuperarPokemonEnCabecera()
+        pkmActivoOponente!!.iniciarAtaque(pkmActivoJugador)
+        when (pkmActivoJugador!!.fueraDeCombate()) {
+            true -> when (this.verificarDerrotaJugador()) {
+                        true -> this.finBatalla("JugadorDerrotado")
+                        else -> {this.jugador.obtenerPkmNoDerrotadoACabecera()
+                                 this.cambiarParticipanteActivo()}
+                    }
+            else -> this.cambiarParticipanteActivo()
+        }
+    }
+
+    override fun turnoAtaqueJugador(jugador: Jugador) {
+        val pkmActivoJugador = jugador.recuperarPokemonEnCabecera()
+        val pkmActivoOponente = this.oponente.recuperarPokemonEnCabecera()
+        pkmActivoJugador!!.iniciarAtaque(pkmActivoOponente)
+        when (pkmActivoOponente!!.fueraDeCombate()) {
+            true -> {println(this.mensajeDerrotaPkmOponente())
+                     this.darExperienciaPKM(pkmActivoJugador)
+                     when (this.verificarDerrotaOponente()) {
+                        true -> {this.finBatalla("OponenteDerrotado")
+                                 println(this.mensajeDerrotaOponente())}
+                        else -> {this.oponente.obtenerPkmNoDerrotadoACabecera()
+                                 this.cambiarParticipanteActivo()}
+                     }}
+            else -> this.cambiarParticipanteActivo()
+        }
+    }
 
     override fun desarrolloTurnoAtaque(jugador: Jugador, oponente: Entrenador) {
+        this.turnoProgresoBatalla += 1
         when (this.participanteActivo) {
             1 -> turnoAtaqueJugador(this.confirmarJugador(this.jugador))
             2 -> turnoAtaqueOponente(this.confirmarOponente(this.oponente))
         }
-        this.turnoProgresoBatalla += 1
     }
 
     override fun verificarDerrotaOponente(): Boolean {
@@ -152,11 +175,13 @@ class BatallaContraOtroEntrenador(override val jugador: Jugador, override val op
         return cuentaVencidos == this.oponente.totalPokemonEnEquipo
     }
 
+    protected fun mensajeDerrotaPkmOponente(): String {
+        return "¡El ${this.oponente.recuperarPokemonEnCabecera()!!.nombre} de ${this.oponente.tipoClaseEntrenador} ${this.oponente.nombre.toUpperCase()} se ha debilitado!"
+    }
+
     override fun mensajeDerrotaOponente(): String {
         return this.oponente.mensajeDerrota
     }
-
-    override fun resultadoDerrotaPkmOponente() {}
 
     // sumar dinero
     override fun resultadoVictoriaJugador() {}
