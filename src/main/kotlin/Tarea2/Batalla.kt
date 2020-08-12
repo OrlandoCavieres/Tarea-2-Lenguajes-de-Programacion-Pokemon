@@ -70,9 +70,13 @@ interface Batalla {
     fun escaparBatalla(jugador: Jugador)
     fun probabilidadEscape()
     fun mensajeDerrotaOponente(): String
-    fun resultadoDerrotaPkmOponente()
     fun resultadoVictoriaJugador()
-    fun darExperienciaPKM(pokemon: Pokemon)
+    fun darExperienciaPKM(pokemon: Pokemon) {}
+
+    fun resultadoDerrotaPkmOponente() {
+        val pkmActivo = this.jugador.recuperarPokemonEnCabecera()
+        this.darExperienciaPKM(pkmActivo!!)
+    }
 
     fun finBatalla(opcion: String) {
         when (opcion) {
