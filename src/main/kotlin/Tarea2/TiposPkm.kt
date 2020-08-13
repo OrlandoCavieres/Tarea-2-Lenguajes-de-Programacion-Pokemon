@@ -1,5 +1,9 @@
 package Tarea2
 
+/**
+ * Clase para pokemon de tipo Normal.
+ * @constructor Inicializa una instancia de clase para pokemon tipo Normal.
+ */
 class NormalPokemon(override val nombre: String,
                     override var vida: Int = 40,
                     override var ataquePrimario: Int = 50,
@@ -26,6 +30,10 @@ class NormalPokemon(override val nombre: String,
     }
 }
 
+/**
+ * Clase para pokemon de tipo Fuego.
+ * @constructor Inicializa una instancia de clase para pokemon tipo Fuego.
+ */
 class FirePokemon(override val nombre: String,
                   override var vida: Int = 40,
                   override var ataquePrimario: Int = 50,
@@ -58,6 +66,10 @@ class FirePokemon(override val nombre: String,
     }
 }
 
+/**
+ * Clase para pokemon de tipo Agua.
+ * @constructor Inicializa una instancia de clase para pokemon tipo Agua.
+ */
 class WaterPokemon(override val nombre: String,
                    override var vida: Int = 40,
                    override var ataquePrimario: Int = 50,
@@ -90,6 +102,10 @@ class WaterPokemon(override val nombre: String,
     }
 }
 
+/**
+ * Clase para pokemon de tipo Eléctrico.
+ * @constructor Inicializa una instancia de clase para pokemon tipo Eléctrico.
+ */
 class ElectricPokemon(override val nombre: String,
                       override var vida: Int = 40,
                       override var ataquePrimario: Int = 50,
@@ -118,6 +134,10 @@ class ElectricPokemon(override val nombre: String,
     }
 }
 
+/**
+ * Clase para pokemon de tipo Psíquico.
+ * @constructor Inicializa una instancia de clase para pokemon tipo Psíquico.
+ */
 class PsychicPokemon(override val nombre: String,
                      override var vida: Int = 40,
                      override var ataquePrimario: Int = 50,
@@ -142,6 +162,10 @@ class PsychicPokemon(override val nombre: String,
     }
 }
 
+/**
+ * Clase para pokemon de tipo Tierra
+ * @constructor Inicializa una instancia de clase para pokemon tipo Tierra.
+ */
 class GroundPokemon(override val nombre: String,
                     override var vida: Int = 40,
                     override var ataquePrimario: Int = 50,
@@ -197,6 +221,10 @@ class GroundPokemon(override val nombre: String,
     }
 }
 
+/**
+ * Clase para pokemon de tipo Lucha.
+ * @constructor Inicializa una instancia de clase para pokemon tipo Lucha.
+ */
 class FightPokemon(override val nombre: String,
                    override var vida: Int = 40,
                    override var ataquePrimario: Int = 50,
@@ -225,6 +253,10 @@ class FightPokemon(override val nombre: String,
     }
 }
 
+/**
+ * Clase para pokemon de tipo Hierba
+ * @constructor Inicializa una instancia de clase para pokemon tipo Hierba.
+ */
 class GrassPokemon(override val nombre: String,
                    override var vida: Int = 40,
                    override var ataquePrimario: Int = 50,
