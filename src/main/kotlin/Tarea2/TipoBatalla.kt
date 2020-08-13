@@ -100,7 +100,7 @@ class BatallaContraPokemonSalvaje(override val jugador: Jugador, override val sa
     override fun darExperienciaPKM(pokemon: Pokemon) {
         val experienciaGanada = (this.salvaje.nivel * (this.salvaje.nivel elevado 3) * 1) / 7
         pokemon.experienciaAcumuladaEnNivel += experienciaGanada
-        println("${pokemon.nombre} ha ganado ${experienciaGanada} puntos de experiencia.")
+        println("${pokemon.nombre} ha ganado $experienciaGanada puntos de experiencia.")
         pokemon.subirNivel()
     }
 
@@ -118,7 +118,8 @@ open class BatallaContraOtroEntrenador(override val jugador: Jugador, override v
     override val capturaPermitida = false
 
     override fun mensajeInicioBatalla(): String {
-        return this.oponente.mensajeInicial
+        val stringParte1 = "¡${this.oponente.tipoClaseEntrenador} ${this.oponente.nombre} te ha retado a una batalla pokemon!\n"
+        return stringParte1 + this.oponente.mensajeInicial
     }
 
     override fun primerTurno() {
@@ -176,6 +177,10 @@ open class BatallaContraOtroEntrenador(override val jugador: Jugador, override v
         return cuentaVencidos == this.oponente.totalPokemonEnEquipo
     }
 
+    /**
+     * Método que entrega el mensaje de que se derrotó al pokemom oponente.
+     * @return String de derrota del pokemon.
+     */
     private fun mensajeDerrotaPkmOponente(): String {
         return "¡El ${this.oponente.recuperarPokemonEnCabecera()!!.nombre} de ${this.oponente.tipoClaseEntrenador} ${this.oponente.nombre.toUpperCase()} se ha debilitado!"
     }
@@ -184,14 +189,15 @@ open class BatallaContraOtroEntrenador(override val jugador: Jugador, override v
         return this.oponente.mensajeDerrota
     }
 
-    // sumar dinero
-    override fun resultadoVictoriaJugador() {}
+    override fun resultadoVictoriaJugador() {
+        this.jugador.sumarDinero(this.oponente.dineroRecompensa)
+    }
 
     override fun darExperienciaPKM(pokemon: Pokemon) {
         val experienciaGanada = ((this.oponente.recuperarPokemonEnCabecera()!!.nivel *
                                  (this.oponente.recuperarPokemonEnCabecera()!!.nivel elevado 3) * 1.5) / 7).toInt()
         pokemon.experienciaAcumuladaEnNivel += experienciaGanada
-        println("${pokemon.nombre} ha ganado ${experienciaGanada} puntos de experiencia.")
+        println("${pokemon.nombre} ha ganado $experienciaGanada puntos de experiencia.")
         pokemon.subirNivel()
     }
 
