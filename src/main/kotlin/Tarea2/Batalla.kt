@@ -1,5 +1,18 @@
 package Tarea2
 
+/**
+ * Interface que representa una batalla pokemon con los posibles componentes de batalla contra pokemon salvaje u
+ * otro entrenador, captura de un pokemon salvaje, escape de batalla de una batalla y los posibles resultados de
+ * la misma.
+ * @constructor Inicializa una batalla entre el jugador y un contrincante.
+ * @property jugador Participante que corresponde al Jugador
+ * @property oponente Participante que corresponde a un entrenador contrincante.
+ * @property salvaje Participante que corresponde a un pokemon salvaje.
+ * @property participanteActivo Número que corresponde al participante que le toca en el turno actual.
+ * @property capturaPermitida Booleano que permite decidir si en la batalla se encuentra permitido capturar a un pokemon.
+ * @property turnoProgresoBatalla Número que permite conocer el turno actual de la batalla.
+ * @property condicionFinalBatalla String que representa la condición en que la batalla terminó.
+ */
 interface Batalla {
     val jugador: Jugador
     val oponente: Entrenador?
@@ -162,7 +175,7 @@ interface Batalla {
     fun deseaPonerApodo(decision: Boolean, nuevoApodo: String)
 
     /**
-     * Método que permite al jugador en la batalla, escapar de la misma, empleando el método probabilidadEscape, para
+     * Método que permite al jugador en la batalla, escapar de la misma, empleando el método [probabilidadEscape], para
      * ver si realmente puede escapar o no. Si lo logra genera una condición de salida de batalla, caso contrario el
      * jugador pierde su turno.
      * @param jugador Corresponde al jugador que desea escapar.
@@ -175,7 +188,7 @@ interface Batalla {
     fun probabilidadEscape()
 
     /**
-     * Retorna el mensaje de derrota del oponente actual.
+     * Método que entrega el mensaje de derrota del oponente actual.
      * @return String del mensaje de derrota
      */
     fun mensajeDerrotaOponente(): String
