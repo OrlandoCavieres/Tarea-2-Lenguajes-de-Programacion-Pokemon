@@ -11,6 +11,7 @@ infix fun Int.elevado(exponente: Int): Int = toDouble().pow(exponente).toInt()
 /**
  * Interface que representa a un pokemon y sus atributos básicos, así como sus acciones básicas y formas de implementar
  * y manejarlas.
+ * @constructor Inicializa una instancia pokemon.
  * @property nombre Nombre del pokemon.
  * @property apodo Apodo ingresado para el pokemon.
  * @property vida Cantidad de vida disponible del pokemon.
