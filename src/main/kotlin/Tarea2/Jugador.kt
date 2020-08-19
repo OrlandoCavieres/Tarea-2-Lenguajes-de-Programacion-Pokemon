@@ -9,9 +9,9 @@ package Tarea2
  * @property totalPokemonCapturados Número que representa el total de capturas que ha realizado el jugador.
  */
 open class Jugador(override val nombre: String): Entrenador {
-    override val equipoPokemon: MutableMap<Int, Pokemon> = mutableMapOf<Int, Pokemon>()
+    override val equipoPokemon: MutableMap<Int, Pokemon> = mutableMapOf()
     override val ordenEquipoPokemon: MutableList<Int> = mutableListOf()
-    private var pokemonPCALGUIEN: MutableMap<Int, Pokemon> = mutableMapOf<Int, Pokemon>()
+    private var pokemonPCALGUIEN: MutableMap<Int, Pokemon> = mutableMapOf()
     private var dinero = 3000
     private var totalPokemonCapturados = 0
     override var genero = "Masculino"

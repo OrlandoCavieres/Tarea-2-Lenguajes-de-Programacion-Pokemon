@@ -23,7 +23,7 @@ interface Entrenador {
     val nombre: String
     var genero: String
     var nivelAproximado: Int
-    val equipoPokemon: MutableMap<Int, Pokemon> get() = mutableMapOf<Int, Pokemon>()
+    val equipoPokemon: MutableMap<Int, Pokemon> get() = mutableMapOf()
     val ordenEquipoPokemon: MutableList<Int> get() = mutableListOf()
     val totalPokemonEnEquipo: Int get() = this.equipoPokemon.size
     val tipoClaseEntrenador: String get() = "JUGADOR"
