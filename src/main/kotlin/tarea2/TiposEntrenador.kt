@@ -1,4 +1,4 @@
-package Tarea2
+package tarea2
 
 class Bella(override val nombre: String, override var nivelAproximado: Int = 5): Entrenador {
     override var genero = "Femenino"

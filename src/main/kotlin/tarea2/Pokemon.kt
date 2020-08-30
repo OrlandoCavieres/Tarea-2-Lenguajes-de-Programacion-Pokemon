@@ -1,4 +1,4 @@
-package Tarea2
+package tarea2
 import kotlin.math.pow
 
 /**
@@ -120,14 +120,14 @@ interface Pokemon {
 
     /**
      * Método que aumenta el contador de daño del pokemon si el ataque recibido del pokemon contrincante es de
-     * tipo electrico.
+     * tipo eléctrico.
      * @param oponente Pokemon que realiza el ataque.
      */
     fun recibeElectricDamage(oponente: ElectricPokemon) {this.recibeNormalDamage(oponente)}
 
     /**
      * Método que aumenta el contador de daño del pokemon si el ataque recibido del pokemon contrincante es de
-     * tipo psiquico.
+     * tipo psíquico.
      * @param oponente Pokemon que realiza el ataque.
      */
     fun recibePsychicDamage(oponente: PsychicPokemon) {this.recibeNormalDamage(oponente)}
@@ -174,7 +174,7 @@ interface Pokemon {
     }
 
     /**
-     * Método que permite restaurar al pokemon a su estado inicial sin daño al resetear su contador de daño.
+     * Método que permite restaurar al pokemon a su estado inicial sin daño al reiniciar su contador de daño.
      */
     fun restaurarPkmAlMaximo() {
         this.contadorDamage = 0

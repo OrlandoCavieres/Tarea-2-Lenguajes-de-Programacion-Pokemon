@@ -1,4 +1,4 @@
-package Tarea2
+package tarea2
 
 import org.junit.Test
 import org.junit.Assert.*

@@ -1,5 +1,4 @@
-package Tarea2
-import kotlin.math.round
+package tarea2
 
 class BatallaContraPokemonSalvaje(override val jugador: Jugador, override val salvaje: Pokemon): Batalla {
     override val oponente: Entrenador? = null
@@ -178,7 +177,7 @@ open class BatallaContraOtroEntrenador(override val jugador: Jugador, override v
     }
 
     /**
-     * Método que entrega el mensaje de que se derrotó al pokemom oponente.
+     * Método que entrega el mensaje de que se derrotó al pokemon oponente.
      * @return String de derrota del pokemon.
      */
     private fun mensajeDerrotaPkmOponente(): String {
@@ -201,7 +200,7 @@ open class BatallaContraOtroEntrenador(override val jugador: Jugador, override v
         pokemon.subirNivel()
     }
 
-    // No atribuibles a batalla contra entrenador por lo que no deben hacer nada
+    // No atribuible a batalla contra entrenador, por lo que no deben hacer nada.
     override fun desarrolloTurnoAtaque(jugador: Jugador, oponente: Pokemon) {}
     override fun turnoAtaqueOponente(pkmSalvaje: Pokemon) {}
     override fun capturarPokemon() {}

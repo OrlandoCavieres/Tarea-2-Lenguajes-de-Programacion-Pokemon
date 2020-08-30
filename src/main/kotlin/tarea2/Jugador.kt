@@ -1,4 +1,4 @@
-package Tarea2
+package tarea2
 
 /**
  * Clase que representa al jugador.
@@ -97,11 +97,11 @@ open class Jugador(override val nombre: String): Entrenador {
         for (pokemon in this.equipoPokemon.values) {
             sumaTotal += pokemon.nivel
         }
-        return (sumaTotal / this.totalPokemonEnEquipo).toInt()
+        return (sumaTotal / this.totalPokemonEnEquipo)
     }
 
     /**
-     * Método que permite añadir un pokemon capturado al equipo pokemon o a PCALGUIEN del jugador según corresponda.
+     * Método que permite añadir un pokemon capturado al equipo pokemon o a PC ALGUIEN del jugador según corresponda.
      * @param pokemon Pokemon capturado a añadir.
      */
     fun addPokemon(pokemon: Pokemon) {
@@ -114,7 +114,7 @@ open class Jugador(override val nombre: String): Entrenador {
     }
 
     /**
-     * Método que confirma la participacion del jugador en una batalla pokemon.
+     * Método que confirma la participación del jugador en una batalla pokemon.
      * @param batallaPKM Batalla en la que participa el jugador.
      * @return Regresa al jugador.
      */

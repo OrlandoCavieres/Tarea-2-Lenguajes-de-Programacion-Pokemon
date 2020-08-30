@@ -1,4 +1,4 @@
-package Tarea2
+package tarea2
 
 /**
  * Clase para pokemon de tipo Normal.
@@ -112,7 +112,7 @@ class ElectricPokemon(override val nombre: String,
                       override var ataqueSecundario: Int = 30): Pokemon {
 
     override var contadorDamage = 0
-    override val tipo = "Electrico"
+    override val tipo = "Eléctrico"
     override var ataqueSeleccionado = 1
     override var nivel = 1
     override var experienciaAcumuladaEnNivel = 0
@@ -144,7 +144,7 @@ class PsychicPokemon(override val nombre: String,
                      override var ataqueSecundario: Int = 30): Pokemon {
 
     override var contadorDamage = 0
-    override val tipo = "Psiquico"
+    override val tipo = "Psíquico"
     override var ataqueSeleccionado = 1
     override var nivel = 1
     override var experienciaAcumuladaEnNivel = 0

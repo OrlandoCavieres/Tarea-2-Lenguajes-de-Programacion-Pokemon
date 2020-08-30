@@ -1,9 +1,9 @@
-package Tarea2
+package tarea2
 
 /**
- * Interface que representa a un entrenador pokemon con todas sus caracteristicas y manejo o creación de su equipo
+ * Interface que representa a un entrenador pokemon con todas sus características y manejo o creación de su equipo
  * pokemon.
- * @constructor Incializa un nuevo entrenador.
+ * @constructor Inicializa un nuevo entrenador.
  * @property nombre Nombre del entrenador.
  * @property genero Genero del entrenador. Puede ser masculino o femenino.
  * @property nivelAproximado Número que representa el nivel aproximado del equipo pokemon del entrenador.

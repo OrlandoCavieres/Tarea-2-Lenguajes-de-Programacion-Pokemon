@@ -1,4 +1,4 @@
-package Tarea2
+package tarea2
 
 /**
  * Interface que representa una batalla pokemon con los posibles componentes de batalla contra pokemon salvaje u
@@ -79,9 +79,9 @@ interface Batalla {
 
     /**
      * Método que lleva a cabo el turno del jugador. En el transcurso del mismo, decide si ha vencido a uno o a todos
-     * los pokemon del contricante, determinado la derrota de este último si es necesario. Solicita cambiar de
+     * los pokemon del contrincante, determinado la derrota de este último si es necesario. Solicita cambiar de
      * pokemon al contrincante, si se vence al pokemon activo de éste. Otorga experiencia al pokemon activo del jugador
-     * si en el trancurso del turno vence a un pokemon del oponente.
+     * si en el transcurso del turno vence a un pokemon del oponente.
      * @param jugador Corresponde al jugador.
      */
     fun turnoAtaqueJugador(jugador: Jugador)
@@ -141,7 +141,7 @@ interface Batalla {
     fun verificarDerrotaOponente(): Boolean
 
     /**
-     * Método que implementa la captura de un pokemon, en base a un porcentaje de exito de captura y un controlador
+     * Método que implementa la captura de un pokemon, en base a un porcentaje de éxito de captura y un controlador
      * random. Si hay éxito, entonces actualiza la condición de la batalla. Caso contrario, no se logra la captura y
      * el jugador pierde su turno.
      */
@@ -183,7 +183,7 @@ interface Batalla {
     fun escaparBatalla(jugador: Jugador)
 
     /**
-     * Método que calcula en terminos de intervalos la probabilidad de que el jugador escape de una batalla pokemon.
+     * Método que calcula en términos de intervalos la probabilidad de que el jugador escape de una batalla pokemon.
      */
     fun probabilidadEscape()
 
@@ -207,7 +207,7 @@ interface Batalla {
     /**
      * Método que establece los resultados finales de la batalla, para una condición de salida de la misma
      * correspondiente.
-     * @param opcion String que representa la claúsula de salida de la batalla.
+     * @param opcion String que representa la clausula de salida de la batalla.
      */
     fun finBatalla(opcion: String) {
         when (opcion) {
