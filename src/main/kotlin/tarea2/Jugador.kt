@@ -36,11 +36,11 @@ open class Jugador(override val nombre: String): Entrenador {
         this.totalPokemonCapturados += 1
         when (tipo) {
             "Hierba" ->
-                this.equipoPokemon[1] = GrassPokemon(nombre = "Bulbasaur", vida = 45, ataquePrimario = 65, ataqueSecundario = 49)
+                this.equipoPokemon[1] = GrassPokemon("Bulbasaur", 45, 65, 49)
             "Fuego" ->
-                this.equipoPokemon[1] = FirePokemon(nombre = "Charmander", vida = 39, ataquePrimario = 60, ataqueSecundario = 52)
+                this.equipoPokemon[1] = FirePokemon("Charmander", 39, 60, 52)
             "Agua" ->
-                this.equipoPokemon[1] = WaterPokemon(nombre = "Squirtle", vida = 44, ataquePrimario = 50, ataqueSecundario = 48)
+                this.equipoPokemon[1] = WaterPokemon("Squirtle", 44, 50, 48)
         }
         while (this.equipoPokemon[1]!!.nivel < 5) {
             this.equipoPokemon[1]!!.experienciaAcumuladaEnNivel += this.equipoPokemon[1]!!.experienciaRequeridaSubirNivel()

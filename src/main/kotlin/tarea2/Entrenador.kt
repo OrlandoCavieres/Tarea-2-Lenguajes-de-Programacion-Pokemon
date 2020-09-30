@@ -87,7 +87,9 @@ interface Entrenador {
      * @param batallaPKM Batalla en la que participará el entrenador.
      * @return Entrega al entrenador correspondiente.
      */
-    fun confirmarBatalla(batallaPKM: Batalla): Entrenador
+    fun confirmarBatalla(batallaPKM: Batalla): Entrenador {
+        return this
+    }
 
     fun generarEquipoPokemon() {
         for (elemento in 0..this.sizeMinimoEquipoPokemon) {
@@ -126,14 +128,14 @@ interface Entrenador {
         val nombrePKMHierba = listOf("Tangela", "Chikorita", "Bellosom", "Oddish", "Bellsprout",
                                      "Exeggcute", "Tropius", "Snivy", "Treecko", "Turtwig")
         return when (tipoPKM) {
-            "Normal" -> NormalPokemon(nombre = nombrePKMNormal.random())
-            "Fuego" -> FirePokemon(nombre = nombrePKMFuego.random())
-            "Agua" -> FirePokemon(nombre = nombrePKMAgua.random())
-            "Electrico" -> FirePokemon(nombre = nombrePKMElectrico.random())
-            "Psiquico" -> FirePokemon(nombre = nombrePKMPsiquico.random())
-            "Tierra" -> FirePokemon(nombre = nombrePKMTierra.random())
-            "Lucha" -> FirePokemon(nombre = nombrePKMLucha.random())
-            "Hierba" -> FirePokemon(nombre = nombrePKMHierba.random())
+            "Normal" -> NormalPokemon(nombrePKMNormal.random())
+            "Fuego" -> FirePokemon(nombrePKMFuego.random())
+            "Agua" -> WaterPokemon(nombrePKMAgua.random())
+            "Electrico" -> ElectricPokemon(nombrePKMElectrico.random())
+            "Psiquico" -> PsychicPokemon(nombrePKMPsiquico.random())
+            "Tierra" -> GroundPokemon(nombrePKMTierra.random())
+            "Lucha" -> FightPokemon(nombrePKMLucha.random())
+            "Hierba" -> GrassPokemon(nombrePKMHierba.random())
             else -> null
         }
     }

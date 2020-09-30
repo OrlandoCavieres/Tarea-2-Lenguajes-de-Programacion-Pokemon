@@ -22,11 +22,11 @@ class NormalPokemon(override val nombre: String,
     }
 
     override fun recibeFightDamage(oponente: FightPokemon) {
-        modDamageAtaquePrimario(pokemon = oponente, modificador = 20)
+        modDamageAtaquePrimario(oponente, 20)
     }
 
     override fun recibePsychicDamage(oponente: PsychicPokemon) {
-        modDamageAtaquePrimario(pokemon = oponente, modificador = -20)
+        modDamageAtaquePrimario(oponente, -20)
     }
 }
 
@@ -54,15 +54,15 @@ class FirePokemon(override val nombre: String,
     }
 
     override fun recibeWaterDamage(oponente: WaterPokemon) {
-        modDamageAtaquePrimario(pokemon = oponente, modificador = 20)
+        modDamageAtaquePrimario(oponente, 20)
     }
 
     override fun recibeGroundDamage(oponente: GroundPokemon) {
-        modDamageAtaquePrimario(pokemon = oponente, modificador = 20)
+        modDamageAtaquePrimario(oponente, 20)
     }
 
     override fun recibeGrassDamage(oponente: GrassPokemon) {
-        modDamageAtaquePrimario(pokemon = oponente, modificador = -20)
+        modDamageAtaquePrimario(oponente, -20)
     }
 }
 
@@ -90,15 +90,15 @@ class WaterPokemon(override val nombre: String,
     }
 
     override fun recibeFireDamage(oponente: FirePokemon) {
-        modDamageAtaquePrimario(pokemon = oponente, modificador = -20)
+        modDamageAtaquePrimario(oponente, -20)
     }
 
     override fun recibeElectricDamage(oponente: ElectricPokemon) {
-        modDamageAtaquePrimario(pokemon = oponente, modificador = 20)
+        modDamageAtaquePrimario(oponente, 20)
     }
 
     override fun recibeGrassDamage(oponente: GrassPokemon) {
-        modDamageAtaquePrimario(pokemon = oponente, modificador = 20)
+        modDamageAtaquePrimario(oponente, 20)
     }
 }
 
@@ -126,11 +126,11 @@ class ElectricPokemon(override val nombre: String,
     }
 
     override fun recibeElectricDamage(oponente: ElectricPokemon) {
-        modDamageAtaquePrimario(pokemon = oponente, modificador = -20)
+        modDamageAtaquePrimario(oponente, -20)
     }
 
     override fun recibeGroundDamage(oponente: GroundPokemon) {
-        modDamageAtaquePrimario(pokemon = oponente, modificador = 20)
+        modDamageAtaquePrimario(oponente, 20)
     }
 }
 
@@ -158,7 +158,7 @@ class PsychicPokemon(override val nombre: String,
     }
 
     override fun recibePsychicDamage(oponente: PsychicPokemon) {
-        modDamageAtaquePrimario(pokemon = oponente, modificador = 20)
+        modDamageAtaquePrimario(oponente, 20)
     }
 }
 
@@ -193,31 +193,31 @@ class GroundPokemon(override val nombre: String,
     }
 
     override fun recibeFireDamage(oponente: FirePokemon) {
-        modDamageAtaquePrimario(pokemon = oponente, modificador = 0)
+        modDamageAtaquePrimario(oponente, 0)
     }
 
     override fun recibeWaterDamage(oponente: WaterPokemon) {
-        modDamageAtaquePrimario(pokemon = oponente, modificador = 20)
+        modDamageAtaquePrimario(oponente, 20)
     }
 
     override fun recibeElectricDamage(oponente: ElectricPokemon) {
-        modDamageAtaquePrimario(pokemon = oponente, modificador = -20)
+        modDamageAtaquePrimario(oponente, -20)
     }
 
     override fun recibePsychicDamage(oponente: PsychicPokemon) {
-        modDamageAtaquePrimario(pokemon = oponente, modificador = 0)
+        modDamageAtaquePrimario(oponente, 0)
     }
 
     override fun recibeGroundDamage(oponente: GroundPokemon) {
-        modDamageAtaquePrimario(pokemon = oponente, modificador = 0)
+        modDamageAtaquePrimario(oponente, 0)
     }
 
     override fun recibeFightDamage(oponente: FightPokemon) {
-        modDamageAtaquePrimario(pokemon = oponente, modificador = 0)
+        modDamageAtaquePrimario(oponente, 0)
     }
 
     override fun recibeGrassDamage(oponente: GrassPokemon) {
-        modDamageAtaquePrimario(pokemon = oponente, modificador = 20)
+        modDamageAtaquePrimario(oponente, 20)
     }
 }
 
@@ -245,11 +245,11 @@ class FightPokemon(override val nombre: String,
     }
 
     override fun recibePsychicDamage(oponente: PsychicPokemon) {
-        modDamageAtaquePrimario(pokemon = oponente, modificador = 20)
+        modDamageAtaquePrimario(oponente, 20)
     }
 
     override fun recibeGroundDamage(oponente: GroundPokemon) {
-        modDamageAtaquePrimario(pokemon = oponente, modificador = -20)
+        modDamageAtaquePrimario(oponente, -20)
     }
 }
 
@@ -277,14 +277,14 @@ class GrassPokemon(override val nombre: String,
     }
 
     override fun recibeFireDamage(oponente: FirePokemon) {
-        modDamageAtaquePrimario(pokemon = oponente, modificador = 20)
+        modDamageAtaquePrimario(oponente, 20)
     }
 
     override fun recibeWaterDamage(oponente: WaterPokemon) {
-        modDamageAtaquePrimario(pokemon = oponente, modificador = -20)
+        modDamageAtaquePrimario(oponente, -20)
     }
 
     override fun recibeGroundDamage(oponente: GroundPokemon) {
-        modDamageAtaquePrimario(pokemon = oponente, modificador = -20)
+        modDamageAtaquePrimario(oponente, -20)
     }
 }
